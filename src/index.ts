@@ -5,6 +5,7 @@ const client = new ShewenyClient({
   intents: ["GUILDS", "GUILD_MESSAGES"],
   managers: {
     commands: {
+      guildId: config.GUILD_ID,
       directory: "./commands",
       autoRegisterApplicationCommands: true,
       prefix: "!",

@@ -2,7 +2,7 @@
   "name": "opensource",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "scripts": {
     "start": "node ./dist/index.js",
     "build": "tsc",
@@ -16,14 +16,11 @@
     "dotenv": "^16.0.1",
     "prisma": "^3.14.0",
     "sheweny": "^3.4.2",
+    "ts-node": "^10.8.0",
     "typescript": "^4.7.2",
     "yaml": "^2.1.1"
   },
-  "devDependencies": {
-    "ts-node-dev": "^1.0.0"
-  },
   "keywords": [],
-  "type": "module",
   "author": "",
   "license": "ISC"
 }
