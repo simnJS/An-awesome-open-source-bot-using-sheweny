@@ -1,0 +1,29 @@
+{
+  "name": "opensource",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "build": "tsc",
+    "dev": "tsnd --respawn --transpile-only --cls ./src/index.ts"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^0.4.1",
+    "@discordjs/voice": "*",
+    "axios": "^0.27.2",
+    "discord.js": "^13.7.0",
+    "dotenv": "^16.0.1",
+    "prisma": "^3.14.0",
+    "sheweny": "^3.4.2",
+    "typescript": "^4.7.2",
+    "yaml": "^2.1.1"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.0.0"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC"
+}
