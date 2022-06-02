@@ -1,6 +1,5 @@
-import { Command } from "sheweny";
-import type { ShewenyClient } from "sheweny";
-import { CommandInteraction, MessageEmbed } from "discord.js";
+import { ShewenyClient, Command } from "sheweny";
+import { CommandInteraction, MessageEmbed, GuildMember } from "discord.js";
 
 export class PingCommand extends Command {
   constructor(client: ShewenyClient) {
@@ -36,21 +35,35 @@ export class PingCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
-    const user = interaction.options.getUser("user");
+    const user = interaction.options.getMember("user")
+    const guildMember = user as GuildMember;
     const reason = interaction.options.getString("reason");
     const notification = interaction.options.getBoolean("notification");
 
-    if (notification == !true) {
+    if (!guildMember.bannable) {
+      interaction.reply('Vous ne pouvez pas ban cette personne.')
+      return
+    }
+
+
+    if (notification == true) {
       try {
-        await user!.send({
+        await guildMember.send({
           embeds: [
             new MessageEmbed()
-            .setTitle(`Vous avez été banni du serveur ${interaction.guild?.name}.`),
+            .setTitle(`Vous avez été banni du serveur ${interaction.guild!.name}.`)
+            .setDescription(`Raison: ${reason} ! `)
+            .setFooter({text: `Sanction appliqué par ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL()})
+            .setTimestamp()
           ],
         });
       } catch (err) {
         err;
       }
     }
+    interaction.reply({content: `${guildMember.user.tag} a été banni pour la raison ${reason}.` , ephemeral: true})
+    await guildMember.ban({
+      reason: reason!,
+    })
   }
 }

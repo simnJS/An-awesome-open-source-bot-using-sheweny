@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
+  "type": "commonjs",
   "scripts": {
     "start": "node ./dist/index.js",
     "build": "tsc",
@@ -14,19 +15,17 @@
     "@discordjs/voice": "*",
     "@types/node": "^17.0.38",
     "axios": "^0.27.2",
-    "discord.js": "^13.7.0",
+    "discord.js": "^13.6.0",
     "dotenv": "^16.0.1",
     "nodemon": "^2.0.16",
     "prisma": "^3.14.0",
     "sheweny": "^3.4.2",
     "ts-node": "^10.8.0",
-    "yaml": "^2.1.1"
+    "yaml": "^2.1.1",
+    "tslint": "^5.12.1",
+    "typescript": "4.6.3"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
-  }
+  "license": "ISC"
 }
