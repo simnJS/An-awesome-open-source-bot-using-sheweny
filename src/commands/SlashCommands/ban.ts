@@ -1,7 +1,7 @@
 import { ShewenyClient, Command } from "sheweny";
 import { CommandInteraction, MessageEmbed, GuildMember } from "discord.js";
 
-export class PingCommand extends Command {
+export class BanCommand extends Command {
   constructor(client: ShewenyClient) {
     super(client, {
       name: "ban",
@@ -53,6 +53,7 @@ export class PingCommand extends Command {
             new MessageEmbed()
             .setTitle(`Vous avez été banni du serveur ${interaction.guild!.name}.`)
             .setDescription(`Raison: ${reason} ! `)
+            .setColor("#8e48f7")
             .setFooter({text: `Sanction appliqué par ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL()})
             .setTimestamp()
           ],
