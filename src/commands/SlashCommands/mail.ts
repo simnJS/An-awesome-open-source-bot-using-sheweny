@@ -29,6 +29,12 @@ export class LockCommand extends Command {
           type: "STRING",
           required: true,
         },
+        {
+          name: "anonyme",
+          description: "Envoyer le message anonymement.",
+          type: "BOOLEAN",
+          required: true,
+        }
       ],
     });
   }
@@ -36,7 +42,7 @@ export class LockCommand extends Command {
   async execute(interaction: CommandInteraction) {
     const user = interaction.options.getUser("user");
     const message = interaction.options.getString("message");
-
+if (interaction.options.getBoolean("anonyme") == true) {
     try {
       user!.send({
         embeds: [
@@ -56,4 +62,28 @@ export class LockCommand extends Command {
       interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
     }
   }
+
+
+if (interaction.options.getBoolean("anonyme") == false) {
+  try {
+    user!.send({
+      embeds: [
+        new MessageEmbed()
+          .setTitle("Vous avez recu un mail de " + interaction.user.username + " !")
+          .setDescription(message!)
+          .setColor("#8e48f7")
+          .setFooter({ text: `2022 ${this.client.user?.username}` }),
+      ],
+    });
+
+    interaction.reply({
+      content: "le message a été envoyé.",
+      ephemeral: true,
+    });
+  } catch (error) {
+    interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
+  }
+}  
+
+}
 }
