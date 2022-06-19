@@ -6,7 +6,8 @@ import {
   Message,
   TextChannel
 } from "discord.js";
-
+import dotenv from "dotenv";
+dotenv.config();
 export class MailCommand extends Command {
   constructor(client: ShewenyClient) {
     super(client, {
@@ -83,7 +84,7 @@ if (interaction.options.getBoolean("anonyme") == false) {
     });
   } catch (error) {
     interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
-    (interaction.guild!.channels.cache.get("959918982201229342") as TextChannel).send(`${interaction.user.username} a envoyé un mail à ${user?.tag}.`);
+    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL}`) as TextChannel).send(`${interaction.user.username} a envoyé un mail à ${user?.tag}.`);
   }
 }  
 

@@ -44,7 +44,7 @@ export class ClearCommand extends Command {
 
             interaction.reply({ content: `${size} messages ont été supprimés.`, ephemeral: true });
 
-            (interaction.guild!.channels.cache.get("959918982201229342") as TextChannel).send(`${interaction.user.username} a supprimé ${size} messages dans le salon ${channel.name}`);
+            (interaction.guild!.channels.cache.get(process.env.LOG_CHANNEL) as TextChannel).send(`${interaction.user.username} a supprimé ${size} messages dans le salon ${channel.name}`);
         }
     }
 }
