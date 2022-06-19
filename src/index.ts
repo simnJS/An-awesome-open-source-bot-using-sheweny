@@ -1,11 +1,14 @@
 import { ShewenyClient } from "sheweny";
-import config from "./config";
+
+import dotenv from "dotenv";
+dotenv.config();
+
 
 const client = new ShewenyClient({
   intents: ["GUILDS", "GUILD_MESSAGES"],
   managers: {
     commands: {
-      guildId: config.GUILD_ID,
+      guildId: process.env.GUILD_ID,
       directory: "./commands",
       autoRegisterApplicationCommands: true,
       prefix: "!",
@@ -26,4 +29,5 @@ const client = new ShewenyClient({
   mode : "development", // Change to production for production bot
 });
 
-client.login(config.DISCORD_TOKEN);
+
+client.login(process.env.DISCORD_TOKEN);

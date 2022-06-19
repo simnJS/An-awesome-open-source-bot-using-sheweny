@@ -6,7 +6,7 @@ import {
   Message,
 } from "discord.js";
 
-export class LockCommand extends Command {
+export class MailCommand extends Command {
   constructor(client: ShewenyClient) {
     super(client, {
       name: "mail",
