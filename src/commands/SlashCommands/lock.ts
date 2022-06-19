@@ -4,6 +4,7 @@ import {
   MessageEmbed,
   GuildMember,
   Message,
+  TextChannel
 } from "discord.js";
 
 export class LockCommand extends Command {
@@ -44,5 +45,6 @@ export class LockCommand extends Command {
         .setFooter({text: `2022 ${this.client.user?.username}`})
     
     ] });
+    (interaction.guild!.channels.cache.get("959918982201229342") as TextChannel).send(`${interaction.user.username} a lock le salon ${channel.name}`);
   }
 }

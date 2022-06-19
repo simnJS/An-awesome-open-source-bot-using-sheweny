@@ -5,7 +5,6 @@ import {
   GuildMember,
   Message,
 } from "discord.js";
-import { createJsxAttribute } from "typescript";
 
 export class UnlockCommand extends Command {
   constructor(client: ShewenyClient) {

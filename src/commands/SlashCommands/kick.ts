@@ -1,5 +1,5 @@
 import { ShewenyClient, Command } from "sheweny";
-import { CommandInteraction, MessageEmbed, GuildMember } from "discord.js";
+import { CommandInteraction, MessageEmbed, GuildMember, TextChannel } from "discord.js";
 
 export class KickCommand extends Command {
   constructor(client: ShewenyClient) {
@@ -63,6 +63,9 @@ export class KickCommand extends Command {
       }
     }
     interaction.reply({content: `${guildMember.user.tag} a été kick pour la raison ${reason}.` , ephemeral: true})
-    await guildMember.kick()
+    await guildMember.kick();
+
+    (interaction.guild!.channels.cache.get("959918982201229342") as TextChannel).send(`${interaction.user.username} a kick ${guildMember.user.tag} pour la raison ${reason}`);
+    
   }
 }

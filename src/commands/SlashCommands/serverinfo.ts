@@ -32,8 +32,6 @@ export class ServerCommand extends Command {
             { name: "Nombre de roles", value: `\`\`\`${interaction.guild?.roles.cache.size}\`\`\``, inline: true },
             { name: "Nombre de salons", value: `\`\`\`${interaction.guild?.channels.cache.size}\`\`\``, inline: true },
             { name: "Nombre d'emojis", value: `\`\`\`${interaction.guild?.emojis.cache.size}\`\`\``, inline: true },
-
-
           ),
       ],
     });

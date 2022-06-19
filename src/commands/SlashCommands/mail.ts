@@ -4,6 +4,7 @@ import {
   MessageEmbed,
   GuildMember,
   Message,
+  TextChannel
 } from "discord.js";
 
 export class MailCommand extends Command {
@@ -13,7 +14,7 @@ export class MailCommand extends Command {
       description: "Envoie un message privée à un utilisateur.",
       type: "SLASH_COMMAND",
       category: "Moderation",
-      cooldown: 0,
+      cooldown: 10,
       userPermissions: ["ADMINISTRATOR"],
       clientPermissions: ["SEND_MESSAGES"],
       options: [
@@ -82,6 +83,7 @@ if (interaction.options.getBoolean("anonyme") == false) {
     });
   } catch (error) {
     interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
+    (interaction.guild!.channels.cache.get("959918982201229342") as TextChannel).send(`${interaction.user.username} a envoyé un mail à ${user?.tag}.`);
   }
 }  
 
