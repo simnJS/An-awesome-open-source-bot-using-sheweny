@@ -38,7 +38,7 @@ export class BanCommand extends Command {
   async execute(interaction: CommandInteraction) {
     const user = interaction.options.getMember("user")
     const guildMember = user as GuildMember;
-    const reason = interaction.options.getString("reason");
+    const reason = interaction.options.getString("reason")!;
     const notification = interaction.options.getBoolean("notification");
 
     if (!guildMember.bannable) {
@@ -67,7 +67,7 @@ export class BanCommand extends Command {
       reason: reason!,
     });
 
-    (interaction.guild!.channels.cache.get(process.env.LOG_CHANNEL) as TextChannel).send(`${interaction.user.username} a ban ${guildMember.user.tag} pour la raison ${reason}`)
+    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL}`) as TextChannel).send(`${interaction.user.username} a ban ${guildMember.user.tag} pour la raison ${reason}`)
 
   }
 }

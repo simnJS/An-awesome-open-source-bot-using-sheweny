@@ -6,7 +6,8 @@ import {
   Message,
   TextChannel
 } from "discord.js";
-
+import dotenv from "dotenv";
+dotenv.config();
 export class LockCommand extends Command {
   constructor(client: ShewenyClient) {
     super(client, {
@@ -45,6 +46,7 @@ export class LockCommand extends Command {
         .setFooter({text: `2022 ${this.client.user?.username}`})
     
     ] });
-    (interaction.guild!.channels.cache.get(process.env.LOG_CHANNEL) as TextChannel).send(`${interaction.user.username} a lock le salon ${channel.name}`);
+    console.log(`${process.env.LOG_CHANNEL}----------------------------------------------------------`);
+    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a lock le salon ${channel.name}`);
   }
 }

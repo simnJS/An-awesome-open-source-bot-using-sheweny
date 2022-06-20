@@ -1,6 +1,7 @@
 import { ShewenyClient, Command } from "sheweny";
 import { CommandInteraction, MessageEmbed, GuildMember, TextChannel } from "discord.js";
-
+import dotenv from "dotenv";
+dotenv.config();
 export class KickCommand extends Command {
   constructor(client: ShewenyClient) {
     super(client, {
@@ -37,7 +38,7 @@ export class KickCommand extends Command {
   async execute(interaction: CommandInteraction) {
     const user = interaction.options.getMember("user")
     const guildMember = user as GuildMember;
-    const reason = interaction.options.getString("reason");
+    const reason = interaction.options.getString("reason")!;
     const notification = interaction.options.getBoolean("notification");
 
     if (!guildMember.kickable) {
@@ -65,7 +66,7 @@ export class KickCommand extends Command {
     interaction.reply({content: `${guildMember.user.tag} a été kick pour la raison ${reason}.` , ephemeral: true})
     await guildMember.kick();
 
-    (interaction.guild!.channels.cache.get(process.env.LOG_CHANNEL) as TextChannel).send(`${interaction.user.username} a kick ${guildMember.user.tag} pour la raison ${reason}`);
+    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL}`) as TextChannel).send(`${interaction.user.username} a kick ${guildMember.user.tag} pour la raison ${reason}`);
     
   }
 }
