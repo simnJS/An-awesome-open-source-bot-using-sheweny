@@ -67,7 +67,7 @@ export class BanCommand extends Command {
       reason: reason!,
     });
 
-    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL}`) as TextChannel).send(`${interaction.user.username} a ban ${guildMember.user.tag} pour la raison ${reason}`)
+    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a ban ${guildMember.user.tag} pour la raison ${reason}`)
 
   }
 }

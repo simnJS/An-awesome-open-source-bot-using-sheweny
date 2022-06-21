@@ -66,7 +66,7 @@ export class KickCommand extends Command {
     interaction.reply({content: `${guildMember.user.tag} a été kick pour la raison ${reason}.` , ephemeral: true})
     await guildMember.kick();
 
-    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL}`) as TextChannel).send(`${interaction.user.username} a kick ${guildMember.user.tag} pour la raison ${reason}`);
+    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a kick ${guildMember.user.tag} pour la raison ${reason}`);
     
   }
 }
