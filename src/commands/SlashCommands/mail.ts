@@ -46,6 +46,7 @@ export class MailCommand extends Command {
     const message = interaction.options.getString("message");
     if (interaction.options.getBoolean("anonyme") == true) {
       try {
+        
         user!.send({
           embeds: [
             new MessageEmbed()
