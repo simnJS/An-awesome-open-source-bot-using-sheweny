@@ -12,7 +12,7 @@ export class interactionCommandCreate extends Event {
 
   async execute(interaction: CommandInteraction, missing: string) {
     interaction.reply({
-      content: `You don't have ${missing} permissions`,
+      content: `Vous n'avez pas la permission ${missing} !`,
       ephemeral: true,
     });
   }
