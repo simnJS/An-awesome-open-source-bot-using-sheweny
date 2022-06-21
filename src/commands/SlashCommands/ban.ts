@@ -1,5 +1,5 @@
 import { ShewenyClient, Command } from "sheweny";
-import { CommandInteraction, MessageEmbed, GuildMember, TextChannel } from "discord.js";
+import { CommandInteraction, MessageEmbed, GuildMember, TextChannel, MessageActionRow, MessageButton } from "discord.js";
 import dotenv from "dotenv";
 dotenv.config();
 export class BanCommand extends Command {
@@ -29,7 +29,7 @@ export class BanCommand extends Command {
           name: "reason",
           description: "La raison du ban.",
           type: "STRING",
-          required: false,
+          required: true,
         },
       ],
     });
@@ -62,7 +62,25 @@ export class BanCommand extends Command {
         err;
       }
     }
-    interaction.reply({content: `${guildMember.user.tag} a été banni pour la raison ${reason}.` , ephemeral: true})
+
+    const embed = new MessageEmbed()
+      .setTitle(`Information`)
+      .setDescription(`${guildMember.user.tag} a été banni pour la raison ${reason}.`)
+      .setColor("#0099ff")
+      .setTimestamp()
+
+      const raw = new MessageActionRow()
+      .addComponents(
+        new MessageButton()
+          .setCustomId(`ban--${guildMember.id}`)
+          .setLabel(`Unban ${guildMember.user.username}`)
+          .setStyle('DANGER')
+        )
+
+
+
+
+    interaction.reply({embeds: [embed], components: [raw]})
     await guildMember.ban({
       reason: reason!,
     });
