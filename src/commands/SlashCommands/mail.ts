@@ -23,7 +23,7 @@ export class MailCommand extends Command {
           name: "user",
           description: "L'utilisateur à qui envoyer le message.",
           type: "USER",
-        required: true,
+          required: true,
         },
         {
           name: "message",
@@ -44,52 +44,52 @@ export class MailCommand extends Command {
   async execute(interaction: CommandInteraction) {
     const user = interaction.options.getUser("user");
     const message = interaction.options.getString("message");
-if (interaction.options.getBoolean("anonyme") == true) {
-    try {
-      user!.send({
-        embeds: [
-          new MessageEmbed()
-            .setTitle("Vous avez recu un mail !")
-            .setDescription(message!)
-            .setColor("#8e48f7")
-            .setFooter({ text: `2022 ${this.client.user?.username}` }),
-        ],
-      });
+    if (interaction.options.getBoolean("anonyme") == true) {
+      try {
+        user!.send({
+          embeds: [
+            new MessageEmbed()
+              .setTitle("Vous avez recu un mail !")
+              .setDescription(message!)
+              .setColor("#8e48f7")
+              .setFooter({ text: `2022 ${this.client.user?.username}` }),
+          ],
+        });
 
-      interaction.reply({
-        content: "le message a été envoyé.",
-        ephemeral: true,
-      });
-    } catch (error) {
-      interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
-      console.log(error)
+        interaction.reply({
+          content: "le message a été envoyé.",
+          ephemeral: true,
+        });
+      } catch (error) {
+        interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
+        console.log(error)
+      }
     }
+
+
+    if (interaction.options.getBoolean("anonyme") == false) {
+      try {
+        user!.send({
+          embeds: [
+            new MessageEmbed()
+              .setTitle("Vous avez recu un mail de " + interaction.user.username + " !")
+              .setDescription(message!)
+              .setColor("#8e48f7")
+              .setFooter({ text: `2022 ${this.client.user?.username}` }),
+          ],
+        });
+
+        interaction.reply({
+          content: "le message a été envoyé.",
+          ephemeral: true,
+        });
+
+        (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a envoyé un mail à ${user?.tag}.`);
+      } catch (error) {
+        interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
+        console.log(error)
+      }
+    }
+
   }
-
-
-if (interaction.options.getBoolean("anonyme") == false) {
-  try {
-    user!.send({
-      embeds: [
-        new MessageEmbed()
-          .setTitle("Vous avez recu un mail de " + interaction.user.username + " !")
-          .setDescription(message!)
-          .setColor("#8e48f7")
-          .setFooter({ text: `2022 ${this.client.user?.username}` }),
-      ],
-    });
-
-    interaction.reply({
-      content: "le message a été envoyé.",
-      ephemeral: true,
-    });
-
-    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a envoyé un mail à ${user?.tag}.`);
-  } catch (error) {
-    interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
-    console.log(error)
-  }
-}  
-
-}
 }
