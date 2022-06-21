@@ -82,9 +82,10 @@ if (interaction.options.getBoolean("anonyme") == false) {
       content: "le message a été envoyé.",
       ephemeral: true,
     });
+
+    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a envoyé un mail à ${user?.tag}.`);
   } catch (error) {
     interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
-    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a envoyé un mail à ${user?.tag}.`);
   }
 }  
 
