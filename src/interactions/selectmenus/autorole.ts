@@ -20,7 +20,8 @@ export class Autorole extends SelectMenu {
     let csharp = selectMenu.guild!.roles.cache.find(r => r.id === "989244857342120026")
     let c = selectMenu.guild!.roles.cache.find(r => r.id === "989244929408663602")
 
-    switch (selectMenu.values[0]) {
+    selectMenu.values.forEach(v => {
+      switch (v) {
       case "first_option": if(css) (member?.roles as GuildMemberRoleManager).add(css); break;
       case "second_option": if(html) (member?.roles as GuildMemberRoleManager).add(html); break;
       case "third_option": if(js) (member?.roles as GuildMemberRoleManager).add(js); break;
@@ -32,5 +33,6 @@ export class Autorole extends SelectMenu {
       case "ninth_option": if(csharp) (member?.roles as GuildMemberRoleManager).add(csharp); break;
       case "tenth_option": if(c) (member?.roles as GuildMemberRoleManager).add(c); break;
     }
+  })
   }
-};
+}
