@@ -6,7 +6,7 @@ export class WarnCommand extends Command {
   constructor(client: ShewenyClient) {
     super(client, {
       name: "warn",
-      description: "Warn member of the guild",
+      description: "Avertir un membre de la guild",
       category: "Moderation",
       type: "SLASH_COMMAND",
       channel: "GUILD",
@@ -21,7 +21,7 @@ export class WarnCommand extends Command {
           name: "reason",
           description: "The reason of warn",
           type: "STRING",
-          required: false,
+          required: true,
         },
       ],
       userPermissions: ["BAN_MEMBERS"],
