@@ -28,7 +28,7 @@ client.login(process.env.DISCORD_TOKEN);
 
 function connectDB() {
   mongoose.connect(`${process.env.DATABASE_URL}`, {
-    serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+    serverSelectionTimeoutMS: 20000, // Keep trying to send operations for 5 seconds
     socketTimeoutMS: 100000, // Close sockets after 45 seconds of inactivity  //45000
   });
 }
