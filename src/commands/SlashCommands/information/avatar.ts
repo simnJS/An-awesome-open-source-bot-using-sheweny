@@ -17,7 +17,7 @@ export class AvatarCommand extends Command {
     interaction.reply({
       embeds: [
         new MessageEmbed()
-        .setTitle(`[Voir la version original](${interaction.guild?.iconURL()})`)
+          .setTitle(`Avatar du serveur ${interaction.guild?.name}`)
         .setImage(`${interaction.guild?.iconURL({format: "png", dynamic: true, size: 1024})}`)
         .setColor("#0099ff")
       ],
