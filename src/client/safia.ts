@@ -9,6 +9,7 @@ export default class Safia extends ShewenyClient {
   public db: DatabaseProvider;
   constructor() {
     super({
+      admins: ["973339571683217408"],
       mode: "production",
       allowedMentions: {
         parse: ["roles", "users"],
