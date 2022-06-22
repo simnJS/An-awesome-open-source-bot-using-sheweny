@@ -1,7 +1,7 @@
 import { Command, ShewenyClient } from "sheweny";
 import { GuildMember, MessageEmbed } from "discord.js";
 import type { CommandInteraction } from "discord.js";
-import { Dayjs } from "dayjs";
+import moment from "moment";
 export class WarnCommand extends Command {
   constructor(client: ShewenyClient) {
     super(client, {
@@ -28,7 +28,7 @@ export class WarnCommand extends Command {
     });
   }
   async execute(interaction: CommandInteraction) {
-    const dayjs = Dayjs();
+    
     const settings = await this.client.db.get(interaction.guildId!);
     const member = interaction.options.getMember("user") as GuildMember;
     if (!member)
@@ -55,10 +55,11 @@ export class WarnCommand extends Command {
         id: member.id,
         moderator: interaction.user.tag,
         reason: reason,
-        date: dayjs().format("DD/MM/YYYY - HH:mm"),
-
+        date: moment().format("DD/MM/YYYY - HH:mm")
     }
 
+    userArray.push(user);
+    await this.client.db.update(`${interaction.guild!.id}`, {users: userArray});
     await interaction.reply({content : `La commande warn a été éxécutée avec succès !` , embeds : [embed] , ephemeral: true});
   }
 }

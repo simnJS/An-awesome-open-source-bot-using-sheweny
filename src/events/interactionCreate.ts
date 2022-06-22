@@ -10,7 +10,7 @@ export class InteractionCreateEvent extends Event {
   }
 
   async execute(interaction: CommandInteraction) {
-    let guildSettings = await this.client.db.get(interaction.guildId!);
+    let guildSettings = await this.client.db.get(interaction.guild!.id!);
 
     if (!guildSettings) {
       await this.client.db.post({

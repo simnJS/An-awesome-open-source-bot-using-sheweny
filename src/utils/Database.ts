@@ -1,10 +1,6 @@
 import { Guild } from "../models";
 import { Types } from "mongoose";
-
-interface GuildCreateDB {
-    guildId: string;
-    name?: string;
-  }
+import type { GuildCreateDB }  from "../utils/interface";
 class DatabaseProvider {
   async post(data: GuildCreateDB): Promise<true> {
     const merged = Object.assign({ _id: new Types.ObjectId() }, { ...data });
