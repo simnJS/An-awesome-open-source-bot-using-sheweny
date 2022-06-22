@@ -1,6 +1,6 @@
 import { ShewenyClient, Command } from "sheweny";
 import { CommandInteraction, MessageEmbed, GuildMember, version } from "discord.js";
-import { timeformat } from "../../utils/miscutils"
+import { timeformat } from "../../../utils/miscutils"
 import dotenv from "dotenv";
 dotenv.config();
 export class InfoCommand extends Command {

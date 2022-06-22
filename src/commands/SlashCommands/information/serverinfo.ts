@@ -1,7 +1,6 @@
 import { ShewenyClient, Command } from "sheweny";
 import { CommandInteraction, MessageEmbed, GuildMember, version } from "discord.js";
 const moment = require('moment');
-import { timeformat } from "../../utils/miscutils"
 import dotenv from "dotenv";
 dotenv.config();
 export class ServerCommand extends Command {
