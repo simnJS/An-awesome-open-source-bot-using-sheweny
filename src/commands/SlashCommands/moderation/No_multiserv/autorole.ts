@@ -26,7 +26,7 @@ export class AutoRoleCommand extends Command {
 		const css = this.client.emojis.cache.find(emoji => emoji.name === "css");
 		const html = this.client.emojis.cache.find(emoji => emoji.name === "html");
 		const javascript = this.client.emojis.cache.find(emoji => emoji.name === "javascript");
-		const Python = this.client.emojis.cache.find(emoji => emoji.name === "python");	
+		const _python = this.client.emojis.cache.find(emoji => emoji.name === "python");	
 		const batch = this.client.emojis.cache.find(emoji => emoji.name === "batch");
 		const java = this.client.emojis.cache.find(emoji => emoji.name === "java");
         const php = this.client.emojis.cache.find(emoji => emoji.name === "php");
@@ -65,7 +65,7 @@ export class AutoRoleCommand extends Command {
                         label: 'Python',
                         description: 'Soit reconnu en tant que développeur Python.',
                         value: "fourth_option",
-                        emoji: Python
+                        emoji: _python
                     },
                     {
                         label: 'Batch',
@@ -98,8 +98,8 @@ export class AutoRoleCommand extends Command {
                         emoji: csharp
                     },
                     {
-                        label: 'C',
-                        description: 'Soit reconnu en tant que développeur C.',
+                        label: 'C / C++',
+                        description: 'Soit reconnu en tant que développeur C / C++.',
                         value: "tenth_option",
                         emoji: c
                     }
