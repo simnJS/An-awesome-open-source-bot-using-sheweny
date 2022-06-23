@@ -49,6 +49,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (css) {
               (member?.roles as GuildMemberRoleManager).remove(css);
+              added_roles.push(`css`);
             }
           } else {
             if (css) {
@@ -63,6 +64,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (html) {
               (member?.roles as GuildMemberRoleManager).remove(html);
+              added_roles.push(`html`);
             }
           }
           else {
@@ -78,6 +80,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (js) {
               (member?.roles as GuildMemberRoleManager).remove(js);
+              added_roles.push(`js`);
             }
           }
           else {
@@ -93,6 +96,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (Python) {
               (member?.roles as GuildMemberRoleManager).remove(Python);
+              added_roles.push(`Python`);
             }
           }
           else {
@@ -108,6 +112,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (batch) {
               (member?.roles as GuildMemberRoleManager).remove(batch);
+              added_roles.push(`batch`);
             }
           }
           else {
@@ -123,6 +128,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (java) {
               (member?.roles as GuildMemberRoleManager).remove(java);
+              added_roles.push(`java`);
             }
           }
           else {
@@ -138,6 +144,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (php) {
               (member?.roles as GuildMemberRoleManager).remove(php);
+              added_roles.push(`php`);
             }
           }
           else {
@@ -153,6 +160,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (lua) {
               (member?.roles as GuildMemberRoleManager).remove(lua);
+              added_roles.push(`lua`);
             }
           }
           else {
@@ -168,6 +176,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (csharp) {
               (member?.roles as GuildMemberRoleManager).remove(csharp);
+              added_roles.push(`csharp`);
             }
           }
           else {
@@ -183,6 +192,7 @@ export class Autorole extends SelectMenu {
           ) {
             if (c) {
               (member?.roles as GuildMemberRoleManager).remove(c);
+              added_roles.push(`c`);
             }
           }
           else {
