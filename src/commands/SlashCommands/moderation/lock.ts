@@ -46,7 +46,6 @@ export class LockCommand extends Command {
         .setFooter({text: `2022 ${this.client.user?.username}`})
     
     ] });
-    console.log(`${process.env.LOG_CHANNEL}----------------------------------------------------------`);
     (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a lock le salon ${channel.name}`);
   }
 }
