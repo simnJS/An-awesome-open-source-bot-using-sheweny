@@ -24,7 +24,7 @@ export class GithubCommand extends Command {
         .setTitle("Lien vers le code source du bot.")
         .setColor("#0099ff")
         .addFields(
-            { name: "Lien", value: `\`\`\`https://github.com/simnJS/An-awesome-open-source-bot-using-sheweny\`\`\``, inline: true },
+            { name: "Lien", value: '[Le github](https://github.com/simnJS/An-awesome-open-source-bot-using-sheweny)', inline: true },
         ),
     ],
     });
