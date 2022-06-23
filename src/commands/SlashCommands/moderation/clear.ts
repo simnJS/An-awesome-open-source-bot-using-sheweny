@@ -44,7 +44,6 @@ export class ClearCommand extends Command {
             const { size } = await channel.bulkDelete(nombre, true);
 
             interaction.reply({ content: `${size} messages ont été supprimés.`, ephemeral: true });
-            console.log(`${process.env.LOG_CHANNEL}----------------------------------------------------------`);
             await (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL}`) as TextChannel).send(`${interaction.user.username} a supprimé ${size} messages dans le salon ${channel!.name}`);
 
         }

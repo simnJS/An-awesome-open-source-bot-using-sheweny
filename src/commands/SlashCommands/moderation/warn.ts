@@ -29,7 +29,7 @@ export class WarnCommand extends Command {
   }
   async execute(interaction: CommandInteraction) {
     
-    const settings = await this.client.db.get(interaction.guildId!);
+    const settings = await this.client.db.get(interaction.guild!.id);
     const member = interaction.options.getMember("user") as GuildMember;
     if (!member)
       return interaction.reply({

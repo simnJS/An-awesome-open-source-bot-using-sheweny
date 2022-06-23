@@ -36,7 +36,7 @@ export class WarnCommand extends Command {
       let warnList = `Liste des warns pour \`${member.user.tag}\` (**${member.id}**) : \n`;
 
       for (let warn of filteredUser) {
-        warnList += `\n**${warn.case}** - Par \`${warn.moderator}\` - (le ${warn.date}. Raison: \`${warn.reason}\``;
+        warnList += `\n**${warn.case}** - Par \`${warn.moderator}\` - (le ${warn.date}). Raison: \`${warn.reason}\``;
       }
 
     await interaction.reply(warnList);

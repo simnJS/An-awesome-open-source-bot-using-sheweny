@@ -31,10 +31,10 @@ export class InfoCommand extends Command {
             { name: "Nombre de membres", value: `\`\`\`${this.client.guilds.cache.reduce((a,b) => a + b.memberCount, 0).toLocaleString()}\`\`\``, inline: true },
             { name: "Nombre de commandes", value: `\`\`\`${this.client.application?.commands.cache.size}\`\`\``, inline: true },
             { name: "Discord.js", value: `\`\`\`${version} (sheweny)\`\`\``, inline: true },
-
-
           ),
-      ],
+      ], ephemeral: true,
+
     });
+    
   }
 }

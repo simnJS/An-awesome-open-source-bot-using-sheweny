@@ -11,6 +11,7 @@ export class GuildEvent extends Event {
   }
 
   async execute(guild: Guild) {
+    
     console.log(`New guild ! ${guild.name} (${guild.id})`);
     await this.client.db.post({ guildId: guild.id, name: guild.name });
   }

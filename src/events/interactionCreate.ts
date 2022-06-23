@@ -20,8 +20,6 @@ export class InteractionCreateEvent extends Event {
       });
         guildSettings = await this.client.db.get(interaction.guildId!);
         return interaction.reply({content: "Le bot a mis a jour la base de données pour ce serveur merci de retapez la commande."})
-
-
     }
   }
 }

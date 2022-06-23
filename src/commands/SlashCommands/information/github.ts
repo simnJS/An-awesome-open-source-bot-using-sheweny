@@ -26,7 +26,7 @@ export class GithubCommand extends Command {
         .addFields(
             { name: "Lien", value: '[Le github](https://github.com/simnJS/An-awesome-open-source-bot-using-sheweny)', inline: true },
         ),
-    ],
+    ],ephemeral: true,
     });
   }
 }

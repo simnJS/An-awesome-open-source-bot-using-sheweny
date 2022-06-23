@@ -80,7 +80,7 @@ export class BanCommand extends Command {
 
 
 
-    interaction.reply({embeds: [embed], components: [raw]})
+    interaction.reply({embeds: [embed], components: [raw], ephemeral: true})
     await guildMember.ban({
       reason: reason!,
     });
