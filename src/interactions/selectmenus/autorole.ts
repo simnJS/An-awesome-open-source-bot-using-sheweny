@@ -40,7 +40,7 @@ export class Autorole extends SelectMenu {
     })
 
     if (added_roles.length > 0) {
-      selectMenu.reply({ content: `Les roles ${added_roles.join(`, `)} vous ont été attribués`, ephemeral: true })
+      selectMenu.reply({ content: `Les roles ${added_roles.join(`, `)} vous ont été attribués !`, ephemeral: true })
     }
 
   }
