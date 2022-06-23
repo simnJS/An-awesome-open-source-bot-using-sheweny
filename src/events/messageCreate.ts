@@ -31,7 +31,7 @@ export class MessageCreateEvent extends Event {
         message.react("👎")
         message.startThread({
           name: `${threadAuthor}-suggestion`,
-          autoArchiveDuration: 60,
+          autoArchiveDuration: "MAX",
         });
       });
 
