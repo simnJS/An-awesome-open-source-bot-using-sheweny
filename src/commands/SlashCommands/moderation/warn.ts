@@ -34,12 +34,7 @@ export class WarnCommand extends Command {
                     name: "remove",
                     description: "Retirer un warn à une personne",
                     type: "SUB_COMMAND",
-                    options: [{
-                        name: "user_to_remove",
-                        type: "USER",
-                        description: "L'utilisateurou le warn doit être retirer",
-                        required: true,
-                    }, {
+                    options: [ {
                         name: "case",
                         type: "NUMBER",
                         description: "Le numéro du warn à retirer",
