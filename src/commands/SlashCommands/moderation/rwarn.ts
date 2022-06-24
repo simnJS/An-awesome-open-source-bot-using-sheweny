@@ -35,7 +35,7 @@ export class RwarnCommand extends Command {
     await interaction.reply(`Le warn ${idWarn} a bien été supprimé.`);
 
 
-    const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
+    const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.modChannel) as TextChannel)
 
     if (!logChannel) return;
 

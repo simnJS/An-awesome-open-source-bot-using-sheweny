@@ -46,10 +46,8 @@ export class ClearCommand extends Command {
             interaction.reply({ content: `${size} messages ont été supprimés.`, ephemeral: true });
 
 
-
-
             const settings = await this.client.db.get(interaction.guild!.id);
-            const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
+            const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.modChannel) as TextChannel)
 
             if (!logChannel) return;
             await logChannel.send(`${interaction.user.username} a supprimé ${size} messages dans le salon ${channel!.name}`);

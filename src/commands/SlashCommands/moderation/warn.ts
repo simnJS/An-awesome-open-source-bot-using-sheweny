@@ -62,7 +62,7 @@ export class WarnCommand extends Command {
     await this.client.db.update(`${interaction.guild!.id}`, {users: userArray});
     await interaction.reply({content : `La commande warn a été éxécutée avec succès !` , embeds : [embed] , ephemeral: true});
 
-    const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
+    const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.modChannel) as TextChannel)
 
     if (!interaction.channel) return;
 

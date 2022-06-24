@@ -87,7 +87,7 @@ export class BanCommand extends Command {
 
 
     const settings = await this.client.db.get(interaction.guild!.id);
-    const channel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
+    const channel = await (interaction.guild!.channels.cache.find(c => c.id === settings.modChannel) as TextChannel)
 
     if (!channel) return;
 
