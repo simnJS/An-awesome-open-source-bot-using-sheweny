@@ -1,7 +1,5 @@
 import { ShewenyClient, Command } from "sheweny";
 import { CommandInteraction, MessageEmbed, GuildMember, TextChannel, MessageActionRow, MessageButton } from "discord.js";
-import dotenv from "dotenv";
-dotenv.config();
 export class BanCommand extends Command {
   constructor(client: ShewenyClient) {
     super(client, {
@@ -40,6 +38,8 @@ export class BanCommand extends Command {
     const guildMember = user as GuildMember;
     const reason = interaction.options.getString("reason")!;
     const notification = interaction.options.getBoolean("notification");
+
+    
 
     if (!guildMember.bannable) {
       interaction.reply('Vous ne pouvez pas ban cette personne.')
@@ -85,7 +85,13 @@ export class BanCommand extends Command {
       reason: reason!,
     });
 
-    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a ban ${guildMember.user.tag} pour la raison ${reason}`)
+
+    const settings = await this.client.db.get(interaction.guild!.id);
+    const channel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
+
+    if (!channel) return;
+
+    (interaction.guild!.channels.cache.get(`${channel}`) as TextChannel)?.send(`${interaction.user.username} a ban ${guildMember.user.tag} pour la raison ${reason}`)
 
   }
 }

@@ -1,5 +1,5 @@
 import { Command, ShewenyClient } from "sheweny";
-import { GuildMember } from "discord.js";
+import { GuildMember, TextChannel } from "discord.js";
 import type { CommandInteraction } from "discord.js";
 export class WarnCommand extends Command {
   constructor(client: ShewenyClient) {
@@ -40,5 +40,6 @@ export class WarnCommand extends Command {
       }
 
     await interaction.reply(warnList);
+
   }
 }

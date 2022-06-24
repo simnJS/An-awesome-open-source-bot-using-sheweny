@@ -2,12 +2,8 @@ import { ShewenyClient, Command } from "sheweny";
 import {
   CommandInteraction,
   MessageEmbed,
-  GuildMember,
-  Message,
   TextChannel
 } from "discord.js";
-import dotenv from "dotenv";
-dotenv.config();
 export class LockCommand extends Command {
   constructor(client: ShewenyClient) {
     super(client, {
@@ -46,6 +42,12 @@ export class LockCommand extends Command {
         .setFooter({text: `2022 ${this.client.user?.username}`})
     
     ] });
-    (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a lock le salon ${channel.name}`);
+
+    const settings = await this.client.db.get(interaction.guild!.id);
+    const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
+
+    if (!logChannel) return;
+     
+    (interaction.guild!.channels.cache.get(`${settings.logChannel}`) as TextChannel).send(`${interaction.user.username} a lock le salon ${channel.name}`);
   }
 }
