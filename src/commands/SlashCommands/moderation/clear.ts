@@ -51,7 +51,7 @@ export class ClearCommand extends Command {
             const settings = await this.client.db.get(interaction.guild!.id);
             const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
 
-            if (!channel) return;
+            if (!logChannel) return;
             await logChannel.send(`${interaction.user.username} a supprimé ${size} messages dans le salon ${channel!.name}`);
 
         }
