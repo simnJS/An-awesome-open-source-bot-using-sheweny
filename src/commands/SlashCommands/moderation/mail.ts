@@ -85,7 +85,12 @@ export class MailCommand extends Command {
           ephemeral: true,
         });
 
-        (interaction.guild!.channels.cache.get(`${process.env.LOG_CHANNEL!}`) as TextChannel).send(`${interaction.user.username} a envoyé un mail à ${user?.tag}.`);
+        const settings = await this.client.db.get(interaction.guild!.id);
+        const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
+    
+        if (!logChannel) return;
+
+        logChannel.send(`${interaction.user.username} a envoyé un mail à ${user?.tag}.`);
       } catch (error) {
         interaction.reply("Une erreur est survenue, le membre n'est pas sur le serveur ou ses mp sont désactivés.");
         console.log(error)

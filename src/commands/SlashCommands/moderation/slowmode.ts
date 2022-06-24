@@ -44,5 +44,12 @@ export class SlowmodeCommand extends Command {
     if (time! < 0) {
         interaction.reply("Le slowmode ne peut pas être inférieur à 0.");
     }
+
+    const settings = await this.client.db.get(interaction.guild!.id);
+    const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
+
+    if (!interaction.channel) return;
+
+    await logChannel.send(`${interaction.user.username} a activé le slowmode sur le salon ${interaction.channel.id}`);
   }
 }

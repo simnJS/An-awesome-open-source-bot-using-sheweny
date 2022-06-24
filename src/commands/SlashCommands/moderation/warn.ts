@@ -1,5 +1,5 @@
 import { Command, ShewenyClient } from "sheweny";
-import { GuildMember, MessageEmbed } from "discord.js";
+import { GuildMember, MessageEmbed, TextChannel } from "discord.js";
 import type { CommandInteraction } from "discord.js";
 import moment from "moment";
 export class WarnCommand extends Command {
@@ -61,5 +61,11 @@ export class WarnCommand extends Command {
     userArray.push(user);
     await this.client.db.update(`${interaction.guild!.id}`, {users: userArray});
     await interaction.reply({content : `La commande warn a été éxécutée avec succès !` , embeds : [embed] , ephemeral: true});
+
+    const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
+
+    if (!interaction.channel) return;
+
+    await logChannel.send(`${interaction.user.username} a averti ${member.user.tag} pour la raison ${reason}`);
   }
 }
