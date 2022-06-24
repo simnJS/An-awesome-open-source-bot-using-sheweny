@@ -22,6 +22,12 @@ export class ConfigCommand extends Command {
                     type: "CHANNEL",
                     required: false,
                 },
+                {
+                    name: "welcome_channel",
+                    description: "Le channel de bienvenue (vide pour rien mettre).",
+                    type: "CHANNEL",
+                    required: false,
+                }
             ],
         });
     }
@@ -30,6 +36,7 @@ export class ConfigCommand extends Command {
         const settings = await this.client.db.get(interaction.guild!.id!);
         const logChannel = interaction.options.getChannel("log_channel") as TextChannel;
         const suggestionChannel = interaction.options.getChannel("suggestion_channel") as TextChannel;
+        const welcomeChannel = interaction.options.getChannel("welcome_channel") as TextChannel;
 
 
         if (logChannel) {
@@ -45,7 +52,13 @@ export class ConfigCommand extends Command {
                 content: `Le channel de suggestion a été mis à jour.`,
                 ephemeral: true,
             });
-
+        }
+        if (welcomeChannel) {
+            await this.client.db.update(`${interaction.guild!.id}`, {welcomeChannel: welcomeChannel.id});
+            interaction.reply({
+                content: `Le channel de bienvenue a été mis à jour.`,
+                ephemeral: true,
+            });
         }
     }
 
