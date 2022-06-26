@@ -74,6 +74,7 @@ export class ConfigCommand extends Command {
         if (option === "logs") {
             const status = interaction.options.getBoolean("status");
             const channel = interaction.options.getChannel("channel") as TextChannel;
+
             if (status == true) {
                 this.client.db.update(interaction.guild!.id, { logs: 'true' })
                 interaction.reply("Les logs sont maintenant activés sur ce serveur.")
@@ -85,7 +86,7 @@ export class ConfigCommand extends Command {
 
             if (channel) {
                 this.client.db.update(interaction.guild!.id, { logChannel: channel.id })
-                interaction.reply("Les logs seront désormais envoyer dans le salon " + channel.name)
+                await interaction.reply("Les logs seront désormais envoyer dans le salon " + channel.name)
             }
         }
         if (option === "suggestion") {
@@ -102,7 +103,7 @@ export class ConfigCommand extends Command {
 
             if (channel) {
                 this.client.db.update(interaction.guild!.id, { suggestChannel: channel.id })
-                interaction.reply("Les suggestions seront mainteant activés dans le salon " + channel.name)
+                await interaction.reply("Les suggestions seront mainteant activés dans le salon " + channel.name)
             }
         }
         if (option === "welcome") {
@@ -118,7 +119,7 @@ export class ConfigCommand extends Command {
             }
             if (channel) {
                 this.client.db.update(interaction.guild!.id, { welcomeChannel: channel.id })
-                interaction.reply("Les messages de bienvenu seront mainteant envoyés dans le channel " + channel.name)
+                await interaction.reply("Les messages de bienvenu seront mainteant envoyés dans le channel " + channel.name)
             }
         }
     }
