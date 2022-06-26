@@ -74,53 +74,60 @@ export class ConfigCommand extends Command {
         if (option === "logs") {
             const status = interaction.options.getBoolean("status");
             const channel = interaction.options.getChannel("channel") as TextChannel;
-
+            let reponse: string[] = [];
             if (status == true) {
                 this.client.db.update(interaction.guild!.id, { logs: 'true' })
-                interaction.reply("Les logs sont maintenant activés sur ce serveur.")
+                reponse.push("Les logs sont maintenant activés.")
             }
             if (status == false) {
                 this.client.db.update(interaction.guild!.id, { logs: 'false' })
-                interaction.reply("Les logs sont maintenant désactivés sur ce serveur.")
+                reponse.push("Les logs sont maintenant désactivés.")
+
             }
 
             if (channel) {
                 this.client.db.update(interaction.guild!.id, { logChannel: channel.id })
-                await interaction.reply("Les logs seront désormais envoyer dans le salon " + channel.name)
+                reponse.push("Le salon des logs a bien été changé.")
             }
+            interaction.reply(reponse.join("\n"))
         }
         if (option === "suggestion") {
             const status = interaction.options.getBoolean("status");
             const channel = interaction.options.getChannel("channel") as TextChannel;
+            let reponse: string[] = [];
             if (status == true) {
                 this.client.db.update(interaction.guild!.id, { suggestion: 'true' })
-                interaction.reply("Les suggestions sont maintenant activés sur ce serveur.")
+                reponse.push("Les suggestions sont maintenant activés.")
+
             }
             if (status == false) {
                 this.client.db.update(interaction.guild!.id, { suggestion: 'false' })
-                interaction.reply("Les suggestions sont maintenant désactivés sur ce serveur.")
+                reponse.push("Les suggestions sont maintenant désactivés.")
             }
 
             if (channel) {
                 this.client.db.update(interaction.guild!.id, { suggestChannel: channel.id })
-                await interaction.reply("Les suggestions seront mainteant activés dans le salon " + channel.name)
+                reponse.push("Le salon des suggestions a bien été changé.")
             }
+            interaction.reply(reponse.join("\n"))
         }
         if (option === "welcome") {
             const status = interaction.options.getBoolean("status");
             const channel = interaction.options.getChannel("channel") as TextChannel;
+            let reponse: string[] = [];
             if (status == true) {
                 this.client.db.update(interaction.guild!.id, { welcome: 'true' })
-                interaction.reply("Les bienvenues sont maintenant activés sur ce serveur.")
+                reponse.push("Les bienvenues sont maintenant activés.")
             }
             if (status == false) {
                 this.client.db.update(interaction.guild!.id, { welcome: 'false' })
-                interaction.reply("Les bienvenues sont maintenant désactivés sur ce serveur.")
+                reponse.push("Les bienvenues sont maintenant désactivés.")
             }
             if (channel) {
                 this.client.db.update(interaction.guild!.id, { welcomeChannel: channel.id })
-                await interaction.reply("Les messages de bienvenu seront mainteant envoyés dans le channel " + channel.name)
+                reponse.push("Le salon des bienvenues a bien été changé.")
             }
+            interaction.reply(reponse.join("\n"))
         }
     }
 }
