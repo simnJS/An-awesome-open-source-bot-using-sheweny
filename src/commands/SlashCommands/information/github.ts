@@ -14,7 +14,7 @@ export class GithubCommand extends Command {
       description: "Affiche le lien vers le code source du bot.",
       type: "SLASH_COMMAND",
       category: "Information",
-      cooldown: 0,
+      cooldown: 10,
     });
   }
 

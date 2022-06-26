@@ -10,7 +10,7 @@ export class InfoCommand extends Command {
       description: "Vous permet d'obtenir des informations sur le bot.",
       type: "SLASH_COMMAND",
       category: "Informations",
-      cooldown: 0,
+      cooldown: 10,
       clientPermissions: ["SEND_MESSAGES"],
     });
   }

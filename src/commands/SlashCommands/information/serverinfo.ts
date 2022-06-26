@@ -10,7 +10,7 @@ export class ServerCommand extends Command {
       description: "Vous permet d'obtenir des informations sur le serveur.",
       type: "SLASH_COMMAND",
       category: "Informations",
-      cooldown: 0,
+      cooldown: 10,
       clientPermissions: ["SEND_MESSAGES"],
     });
   }
