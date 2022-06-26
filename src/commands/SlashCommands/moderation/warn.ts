@@ -104,7 +104,7 @@ export class WarnCommand extends Command {
             const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.modChannel) as TextChannel)
 
             if (!interaction.channel) return;
-
+            if (settings.logs === false) return;
             await logChannel.send(`${interaction.user.username} a averti ${user_add.user.tag} pour la raison ${reason}`);
 
         }
@@ -123,7 +123,7 @@ export class WarnCommand extends Command {
 
 
             const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.modChannel) as TextChannel)
-
+            if (settings.logs === false) return;
             if (!logChannel) return;
 
             await logChannel.send(`${interaction.user.username} a supprimé le warn ${Case}`);

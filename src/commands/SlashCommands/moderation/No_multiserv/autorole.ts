@@ -75,7 +75,7 @@ export class AutoRoleCommand extends Command {
                     },
                     {
                         label: 'Java',
-                        description: 'Soit reconnu en tant que développeur Golang.',
+                        description: 'Soit reconnu en tant que développeur Java.',
                         value: "sixth_option",
                         emoji: java
                     },

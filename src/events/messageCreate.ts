@@ -14,6 +14,7 @@ export class MessageCreateEvent extends Event {
     const channel = await (message.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
 
     if (!channel) return;
+    if (settings.suggestion === false) return;
     if (message.author.bot) return;
 
     if (message.channel === channel) {

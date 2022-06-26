@@ -11,55 +11,115 @@ export class ConfigCommand extends Command {
             userPermissions: ["ADMINISTRATOR"],
             options: [
                 {
-                    name: "log_channel",
-                    description: "Le channel de log (vide pour rien mettre).",
-                    type: "CHANNEL",
-                    required: false,
+                    name: "logs",
+                    description: "La configuration en rapport avec les logs.",
+                    type: "SUB_COMMAND",
+                    options: [
+                        {
+                            name: "status",
+                            description: "Vous permet d'activer ou de désactiver les logs sur le serveur.",
+                            type: "BOOLEAN",
+                            required: true,
+                        },
+                        {
+                            name: "channel",
+                            description: "Le salon dans lequel les logs seront envoyés.",
+                            type: "CHANNEL",
+                            required: true,
+                        },
+                    ],
                 },
                 {
-                    name: "suggestion_channel",
-                    description: "Le channel de suggestion (vide pour rien mettre).",
-                    type: "CHANNEL",
-                    required: false,
-                },
-                {
-                    name: "welcome_channel",
-                    description: "Le channel de bienvenue (vide pour rien mettre).",
-                    type: "CHANNEL",
-                    required: false,
+                    name: "suggestion",
+                    description: "La configuration en rapport avec les suggestions.",
+                    type: "SUB_COMMAND",
+                    options: [
+                        {
+                            name: "status",
+                            description: "Vous permet d'activer ou de désactiver les suggestions sur le serveur.",
+                            type: "BOOLEAN",
+                            required: true,
+                        },
+                        {
+                            name: "channel",
+                            description: "Le salon dans lequel les suggestions seront envoyés.",
+                            type: "CHANNEL",
+                            required: true,
+                        },
+                    ],
+                }, {
+                    name: "welcome",
+                    description: "La configuration en rapport avec les bienvenues.",
+                    type: "SUB_COMMAND",
+                    options: [
+                        {
+                            name: "status",
+                            description: "Vous permet d'activer ou de désactiver les bienvenues sur le serveur.",
+                            type: "BOOLEAN",
+                            required: true,
+                        },
+                        {
+                            name: "channel",
+                            description: "Le salon dans lequel les bienvenues seront envoyés.",
+                            type: "CHANNEL",
+                            required: true,
+                        },
+                    ],
                 }
-            ],
+            ]
         });
     }
-
     async execute(interaction: CommandInteraction) {
-        const settings = await this.client.db.get(interaction.guild!.id!);
-        const logChannel = interaction.options.getChannel("log_channel") as TextChannel;
-        const suggestionChannel = interaction.options.getChannel("suggestion_channel") as TextChannel;
-        const welcomeChannel = interaction.options.getChannel("welcome_channel") as TextChannel;
+        const option = interaction.options.getSubcommand()
+        if (option === "logs") {
+            const status = interaction.options.getBoolean("status");
+            const channel = interaction.options.getChannel("channel") as TextChannel;
+            if (status == true) {
+                this.client.db.update(interaction.guild!.id, { logs: 'true' })
+                interaction.reply("Les logs sont maintenant activés sur ce serveur.")
+            }
+            if (status == false) {
+                this.client.db.update(interaction.guild!.id, { logs: 'false' })
+                interaction.reply("Les logs sont maintenant désactivés sur ce serveur.")
+            }
 
+            if (channel) {
+                this.client.db.update(interaction.guild!.id, { logChannel: channel.id })
+                interaction.reply("Les logs seront désormais envoyer dans le salon " + channel.name)
+            }
+        }
+        if (option === "suggestion") {
+            const status = interaction.options.getBoolean("status");
+            const channel = interaction.options.getChannel("channel") as TextChannel;
+            if (status == true) {
+                this.client.db.update(interaction.guild!.id, { suggestion: 'true' })
+                interaction.reply("Les suggestions sont maintenant activés sur ce serveur.")
+            }
+            if (status == false) {
+                this.client.db.update(interaction.guild!.id, { suggestion: 'false' })
+                interaction.reply("Les suggestions sont maintenant désactivés sur ce serveur.")
+            }
 
-        if (logChannel) {
-            await this.client.db.update(`${interaction.guild!.id}`, {modChannel: logChannel.id});
-            interaction.reply({
-                content: `Le channel de log a été mis à jour.`,
-                ephemeral: true,
-            });
+            if (channel) {
+                this.client.db.update(interaction.guild!.id, { suggestChannel: channel.id })
+                interaction.reply("Les suggestions seront mainteant activés dans le salon " + channel.name)
+            }
         }
-        if (suggestionChannel) {
-            await this.client.db.update(`${interaction.guild!.id}`, {suggestChannel: suggestionChannel.id});
-            interaction.reply({
-                content: `Le channel de suggestion a été mis à jour.`,
-                ephemeral: true,
-            });
-        }
-        if (welcomeChannel) {
-            await this.client.db.update(`${interaction.guild!.id}`, {welcomeChannel: welcomeChannel.id});
-            interaction.reply({
-                content: `Le channel de bienvenue a été mis à jour.`,
-                ephemeral: true,
-            });
+        if (option === "welcome") {
+            const status = interaction.options.getBoolean("status");
+            const channel = interaction.options.getChannel("channel") as TextChannel;
+            if (status == true) {
+                this.client.db.update(interaction.guild!.id, { welcome: 'true' })
+                interaction.reply("Les bienvenues sont maintenant activés sur ce serveur.")
+            }
+            if (status == false) {
+                this.client.db.update(interaction.guild!.id, { welcome: 'false' })
+                interaction.reply("Les bienvenues sont maintenant désactivés sur ce serveur.")
+            }
+            if (channel) {
+                this.client.db.update(interaction.guild!.id, { welcomeChannel: channel.id })
+                interaction.reply("Les messages de bienvenu seront mainteant envoyés dans le channel " + channel.name)
+            }
         }
     }
-
 }

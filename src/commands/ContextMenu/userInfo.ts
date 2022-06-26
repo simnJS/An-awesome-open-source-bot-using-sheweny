@@ -14,6 +14,9 @@ export class PingCommand extends Command {
 
     async execute(interaction: ContextMenuInteraction) {
         const member = await interaction.guild?.members.fetch(interaction.targetId)
+        
+        if (!member) return ("Cette personne n'est pas sur le serveur.");
+
 
         interaction.reply({
             embeds: [

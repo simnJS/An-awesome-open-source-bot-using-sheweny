@@ -13,6 +13,7 @@ export class GuildMemberAddEvent extends Event {
   async execute(member: GuildMember) {
     
     const settings = await this.client.db.get(member.guild!.id);
+    if (settings.welcome === false) return;
     const channel = await (member.guild!.channels.cache.find(c => c.id === settings.welcomeChannel) as TextChannel)
 
     if (!channel) return;
@@ -20,6 +21,7 @@ export class GuildMemberAddEvent extends Event {
     const embed = new MessageEmbed()
         .setTitle(`${member.user.username} vient de rejoindre le serveur !`)
         .setDescription(`Nous sommes maintenant ${member.guild!.memberCount} membres sur le serveur.`)
+        .setImage(member.user.displayAvatarURL({ format: "png", dynamic: true, size: 1024 }))
         .setColor('#FEE75C')
         .setTimestamp()
     await channel.send({embeds: [embed]});

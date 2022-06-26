@@ -7,6 +7,9 @@ interface model {
     users: []
     suggestChannel: string;
     welcomeChannel: string;
+    logs: string;
+    welcome: string;
+    suggestion: string;
 }
 
 const guildSchema = new mongoose.Schema<model>({
@@ -16,6 +19,9 @@ const guildSchema = new mongoose.Schema<model>({
     users: { 'type': [], 'default': [] },
     suggestChannel: { 'type': String, 'default': '' },
     welcomeChannel: { 'type': String, 'default': '' },
+    logs: { 'type': String, 'default': '' },
+    welcome: { 'type': String, 'default': '' },
+    suggestion: { 'type': String, 'default': '' },
 })
 
 export default mongoose.model('Guild', guildSchema);

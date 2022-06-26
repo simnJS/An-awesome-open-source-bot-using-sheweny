@@ -44,6 +44,7 @@ export class LockCommand extends Command {
     ] });
 
     const settings = await this.client.db.get(interaction.guild!.id);
+    if (settings.logs === false) return;
     const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.modChannel) as TextChannel)
 
     if (!logChannel) return;
