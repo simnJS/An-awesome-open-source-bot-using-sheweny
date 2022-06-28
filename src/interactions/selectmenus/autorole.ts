@@ -39,6 +39,9 @@ export class Autorole extends SelectMenu {
     let c = selectMenu.guild!.roles.cache.find(
       (r) => r.id === "989244929408663602"
     );
+    let apprenti = selectMenu.guild!.roles.cache.find(
+      (r) => r.id === "985140667099525120"
+    );
 
     let added_roles: string[] = [];
     selectMenu.values.forEach((v) => {
@@ -201,6 +204,23 @@ export class Autorole extends SelectMenu {
               added_roles.push(`c`);
             }
           }
+          break;
+        case "eleventh_option":
+          if (
+            (member?.roles as GuildMemberRoleManager).cache.has(`${apprenti?.id}`)
+          ) {
+            if (apprenti) {
+              (member?.roles as GuildMemberRoleManager).remove(apprenti);
+              added_roles.push(`apprenti`);
+            }
+          }
+          else {
+            if (apprenti) {
+              (member?.roles as GuildMemberRoleManager).add(apprenti);
+              added_roles.push(`apprenti`);
+            }
+          }
+          break;
       }
     });
     if (added_roles.length > 0) {

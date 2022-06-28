@@ -44,6 +44,12 @@ export class AutoRoleCommand extends Command {
                 .setMaxValues(10)
                 .addOptions([
                     {
+                        label: 'Apprenti - Développeur',
+                        description: 'Soit reconnu en tant que apprenti - développeur.',
+                        value: "eleventh_option",
+                        emoji: '📖'
+                    },
+                    {
                         label: 'Css',
                         description: 'Soit reconnu en tant que développeur Css.',
                         value: 'first_option',
@@ -102,7 +108,7 @@ export class AutoRoleCommand extends Command {
                         description: 'Soit reconnu en tant que développeur C / C++.',
                         value: "tenth_option",
                         emoji: c
-                    }
+                    },
                 ]),
         );
 
