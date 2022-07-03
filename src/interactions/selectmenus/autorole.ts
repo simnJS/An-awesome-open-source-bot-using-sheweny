@@ -121,7 +121,7 @@ export class Autorole extends SelectMenu {
           else {
             if (batch) {
               (member?.roles as GuildMemberRoleManager).add(batch);
-              added_roles.push(`batch`);
+              added_roles.push(`shell`);
             }
           }
           break;

@@ -65,7 +65,6 @@ export class WarnCommand extends Command {
         const settings = await this.client.db.get(interaction.guildId!);
         const option = interaction.options.getSubcommand(),
             user_add = interaction.options.getMember("user") as GuildMember,
-            userToRemove = interaction.options.getMember("user_to_remove") as GuildMember,
             Case = interaction.options.getNumber("case"),
             utilisateur = interaction.options.getMember("utilisateur") as GuildMember,
             reason = interaction.options.getString("reason");
@@ -145,6 +144,20 @@ export class WarnCommand extends Command {
                 warnList += `\n**${warn.case}** - Par \`${warn.moderator}\` - (le ${warn.date}). Raison: \`${warn.reason}\``;
             }
 
+
+
+            try {
+                user_add.send({embeds: [new MessageEmbed(
+                    new MessageEmbed()
+                    .setTitle(`Vous avez été warn sur le serveur ${interaction.guild!.name}.`)
+                    .setDescription(`Raison: ${reason} ! `)
+                    .setColor("#8e48f7")
+                    .setFooter({ text: `Sanction appliqué par ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
+                    .setTimestamp()
+                )]})
+            }   catch (e) {
+                console.log(e);
+            }
             await interaction.reply(warnList);
         }
     }

@@ -74,8 +74,8 @@ export class AutoRoleCommand extends Command {
                         emoji: _python
                     },
                     {
-                        label: 'Batch',
-                        description: 'Soit reconnu en tant que développeur Batch.',
+                        label: 'Shell',
+                        description: 'Soit reconnu en tant que développeur dans le Shell.',
                         value: "fifth_option",
                         emoji: batch
                     },
