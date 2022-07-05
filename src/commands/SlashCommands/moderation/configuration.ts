@@ -162,6 +162,7 @@ export class ConfigCommand extends Command {
             }
             if (role) {
                 this.client.db.update(interaction.guild!.id, { verificationRole: role.id })
+                console.log(role.id)
                 reponse.push("Le role de vérification a bien été changer.")
             }
             interaction.reply(reponse.join("\n"))
