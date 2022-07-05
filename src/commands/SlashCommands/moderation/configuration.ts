@@ -150,7 +150,7 @@ export class ConfigCommand extends Command {
 
         if (option === "verification") {
             const status = interaction.options.getBoolean("status");
-            const channel = interaction.options.getRole("channel") 
+            const role = interaction.options.getRole("role")!
             let reponse: string[] = [];
             if (status == true) {
                 this.client.db.update(interaction.guild!.id, { verification: 'true' })
@@ -160,8 +160,8 @@ export class ConfigCommand extends Command {
                 this.client.db.update(interaction.guild!.id, { verification: 'false' })
                 reponse.push("La vérification est maintenant désactivé.")
             }
-            if (channel) {
-                this.client.db.update(interaction.guild!.id, { verificationRole: channel.id })
+            if (role) {
+                this.client.db.update(interaction.guild!.id, { verificationRole: role.id })
                 reponse.push("Le role de vérification a bien été changer.")
             }
             interaction.reply(reponse.join("\n"))
