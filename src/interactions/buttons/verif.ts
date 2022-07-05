@@ -21,6 +21,6 @@ module.exports = class Btns extends Button {
     const userid = button.customId.split("--")[1];
     const user = await button.guild?.members.fetch(userid) as GuildMember;
     (user?.roles as GuildMemberRoleManager).add(roleToAdd);
-    await button.reply("Vous êtes maintenant vérifié.")
+    await button.reply({content: "L'utilisateur a été verifié.", ephemeral: true});
   }
 }

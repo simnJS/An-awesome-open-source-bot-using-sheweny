@@ -28,7 +28,7 @@ export class GuildMemberAddEvent extends Event {
 
     if (settings.autorole === "false") return;
     try {
-    const role = settings.verificationRole
+    const role = settings.autorole
     let roleToAdd = member.guild!.roles.cache.find(r => r.id === `${role}`) as RoleResolvable
 
     (member?.roles as GuildMemberRoleManager).add(roleToAdd);
