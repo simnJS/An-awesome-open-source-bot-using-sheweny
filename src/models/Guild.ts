@@ -8,9 +8,11 @@ interface model {
     bans: [];
     suggestChannel: string;
     welcomeChannel: string;
+    verificationRole: string;
     logs: string;
     welcome: string;
     suggestion: string;
+    verification: string;
 }
 
 const guildSchema = new mongoose.Schema<model>({
@@ -24,6 +26,8 @@ const guildSchema = new mongoose.Schema<model>({
     logs: { 'type': String, 'default': '' },
     welcome: { 'type': String, 'default': '' },
     suggestion: { 'type': String, 'default': '' },
+    verification: { 'type': String, 'default': 'false' },
+    verificationRole: { 'type': String, 'default': '' }
 })
 
 export default mongoose.model('Guild', guildSchema);

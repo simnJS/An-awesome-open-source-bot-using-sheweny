@@ -65,6 +65,24 @@ export class ConfigCommand extends Command {
                             required: true,
                         },
                     ],
+                }, {
+                    name: "verification",
+                    description: "la configuration en rapport avec la vérification.",
+                    type: "SUB_COMMAND",
+                    options: [
+                        {
+                            name: "status",
+                            description: "Vous permet d'activer ou de désactiver la vérification sur le serveur.",
+                            type: "BOOLEAN",
+                            required: true,
+                        },
+                        {
+                            name: "role",
+                            description: "Le role qui sera utilisé pour la vérification.",
+                            type: "ROLE",
+                            required: true,
+                        },
+                    ],
                 }
             ]
         });
@@ -126,6 +144,25 @@ export class ConfigCommand extends Command {
             if (channel) {
                 this.client.db.update(interaction.guild!.id, { welcomeChannel: channel.id })
                 reponse.push("Le salon des bienvenues a bien été changé.")
+            }
+            interaction.reply(reponse.join("\n"))
+        }
+
+        if (option === "verification") {
+            const status = interaction.options.getBoolean("status");
+            const channel = interaction.options.getRole("channel") 
+            let reponse: string[] = [];
+            if (status == true) {
+                this.client.db.update(interaction.guild!.id, { verification: 'true' })
+                reponse.push("La vérification est maintenant activé.")
+            }
+            if (status == false) {
+                this.client.db.update(interaction.guild!.id, { verification: 'false' })
+                reponse.push("La vérification est maintenant désactivé.")
+            }
+            if (channel) {
+                this.client.db.update(interaction.guild!.id, { verificationRole: channel.id })
+                reponse.push("Le role de vérification a bien été changer.")
             }
             interaction.reply(reponse.join("\n"))
         }
