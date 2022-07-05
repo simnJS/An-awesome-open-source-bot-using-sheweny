@@ -1,4 +1,4 @@
-import { ButtonInteraction, GuildMember, GuildMemberManager, Permissions, GuildMemberRoleManager } from "discord.js";
+import { ButtonInteraction, GuildMember, GuildMemberManager, Permissions, GuildMemberRoleManager, RoleResolvable } from "discord.js";
 import { ShewenyClient } from "sheweny";
 
 const {
@@ -22,13 +22,13 @@ module.exports = class Btns extends Button {
 
     const role = settings.verificationRole
 
-    let roleToAdd = button.guild!.roles.cache.find(r => r.id === `${role}`)
+    let roleToAdd = button.guild!.roles.cache.find(r => r.id === `${role}`) as RoleResolvable
 
 
     const userid = button.customId.split("--")[1];
     
     const user = await button.guild?.members.fetch(userid) as GuildMember;
-    (user?.roles as GuildMemberRoleManager).add(`${roleToAdd}`);
+    (user?.roles as GuildMemberRoleManager).add(roleToAdd);
 
 
     await button.reply("Vous êtes maintenant vérifié.")
