@@ -185,5 +185,24 @@ export class ConfigCommand extends Command {
             }
             interaction.reply(reponse.join("\n"))
         }
+        if (option === "autorole") {
+            const status = interaction.options.getBoolean("status");
+            const role = interaction.options.getRole("role")!
+            let reponse: string[] = [];
+            if (status == true) {
+                this.client.db.update(interaction.guild!.id, { verification: 'true' })
+                reponse.push("L'autorole' est maintenant activé.")
+            }
+            if (status == false) {
+                this.client.db.update(interaction.guild!.id, { verification: 'false' })
+                reponse.push("L'autorole est maintenant désactivé.")
+            }
+            if (role) {
+                this.client.db.update(interaction.guild!.id, { verificationRole: role.id })
+                console.log(role.id)
+                reponse.push("Le role de l'autorole a bien été changer.")
+            }
+            interaction.reply(reponse.join("\n"))
+        }
     }
 }
