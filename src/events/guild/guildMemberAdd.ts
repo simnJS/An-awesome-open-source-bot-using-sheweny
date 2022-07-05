@@ -1,6 +1,6 @@
 import { Event } from "sheweny";
 import type { ShewenyClient } from "sheweny";
-import { GuildMember, MessageEmbed, TextChannel } from "discord.js";
+import { GuildMember, MessageEmbed, TextChannel, RoleResolvable, GuildMemberRoleManager } from "discord.js";
 
 
 export class GuildMemberAddEvent extends Event {
@@ -26,5 +26,14 @@ export class GuildMemberAddEvent extends Event {
         .setTimestamp()
     await channel.send({embeds: [embed]});
 
-  }
+    if (settings.autorole === "false") return;
+    try {
+    const role = settings.verificationRole
+    let roleToAdd = member.guild!.roles.cache.find(r => r.id === `${role}`) as RoleResolvable
+
+    (member?.roles as GuildMemberRoleManager).add(roleToAdd);
+  }catch (e) {
+    console.log(e)
+}
+} 
 };

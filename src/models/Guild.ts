@@ -13,6 +13,8 @@ interface model {
     welcome: string;
     suggestion: string;
     verification: string;
+    autorole: string;
+    autoroleRole: string;
 }
 
 const guildSchema = new mongoose.Schema<model>({
@@ -27,7 +29,9 @@ const guildSchema = new mongoose.Schema<model>({
     welcome: { 'type': String, 'default': '' },
     suggestion: { 'type': String, 'default': '' },
     verification: { 'type': String, 'default': 'false' },
-    verificationRole: { 'type': String, 'default': '' }
+    verificationRole: { 'type': String, 'default': '' },
+    autorole: { 'type': String, 'default': 'false' },
+    autoroleRole: { 'type': String, 'default': '' }
 })
 
 export default mongoose.model('Guild', guildSchema);

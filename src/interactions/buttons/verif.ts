@@ -15,23 +15,12 @@ module.exports = class Btns extends Button {
   }
 
   async execute(button: ButtonInteraction) {
-
-
-
     const settings = await this.client.db.get(button.guild!.id);
-
     const role = settings.verificationRole
-
     let roleToAdd = button.guild!.roles.cache.find(r => r.id === `${role}`) as RoleResolvable
-
-
     const userid = button.customId.split("--")[1];
-    
     const user = await button.guild?.members.fetch(userid) as GuildMember;
     (user?.roles as GuildMemberRoleManager).add(roleToAdd);
-
-
     await button.reply("Vous êtes maintenant vérifié.")
-
   }
 }

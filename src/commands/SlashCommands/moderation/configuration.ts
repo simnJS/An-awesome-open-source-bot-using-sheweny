@@ -83,6 +83,24 @@ export class ConfigCommand extends Command {
                             required: true,
                         },
                     ],
+                }, {
+                    name: "autorole",
+                    description: "la configuration en rapport avec l'autorole'.",
+                    type: "SUB_COMMAND",
+                    options: [
+                        {
+                            name: "status",
+                            description: "Vous permet d'activer ou de désactiver l'autorole.",
+                            type: "BOOLEAN",
+                            required: true,
+                        },
+                        {
+                            name: "role",
+                            description: "Le role qui sera utilisé pour l'autorole'.",
+                            type: "ROLE",
+                            required: true,
+                        },
+                    ],
                 }
             ]
         });
