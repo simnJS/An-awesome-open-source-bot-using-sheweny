@@ -190,15 +190,15 @@ export class ConfigCommand extends Command {
             const role = interaction.options.getRole("role")!
             let reponse: string[] = [];
             if (status == true) {
-                this.client.db.update(interaction.guild!.id, { verification: 'true' })
+                this.client.db.update(interaction.guild!.id, { autorole: 'true' })
                 reponse.push("L'autorole' est maintenant activé.")
             }
             if (status == false) {
-                this.client.db.update(interaction.guild!.id, { verification: 'false' })
+                this.client.db.update(interaction.guild!.id, { autorole: 'false' })
                 reponse.push("L'autorole est maintenant désactivé.")
             }
             if (role) {
-                this.client.db.update(interaction.guild!.id, { verificationRole: role.id })
+                this.client.db.update(interaction.guild!.id, { autoroleRole: role.id })
                 console.log(role.id)
                 reponse.push("Le role de l'autorole a bien été changer.")
             }
