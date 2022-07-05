@@ -22,9 +22,7 @@ module.exports = class Btns extends Button {
 
     const role = settings.verificationRole
 
-    let roleToAdd = button.guild!.roles.cache.find(
-        (r) => r.id === role
-      );
+    let roleToAdd = button.guild!.roles.cache.find(r => r.id === role)
 
 
     const userid = button.customId.split("--")[1];
