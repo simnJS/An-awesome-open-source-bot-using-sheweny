@@ -41,7 +41,7 @@ export class UnlockCommand extends Command {
       ephemeral: true,
     });
 
-    channel.send({ embeds: [new MessageEmbed()
+    await channel.send({ embeds: [new MessageEmbed()
         .setTitle("Ce salon est désormais dévérouillé.")
         .setDescription(`Vous pouvez de nouveaux écrire des messages ici.`)
         .setColor("#8e48f7")
