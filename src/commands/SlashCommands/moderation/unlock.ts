@@ -22,6 +22,10 @@ export class UnlockCommand extends Command {
   async execute(interaction: CommandInteraction) {
     const channel = interaction.channel;
 
+
+    try {
+
+    
     if (channel?.type !== "GUILD_TEXT") {
       interaction.reply("Vous pouvez lock seulement les channels textuels.");
       return;
@@ -44,5 +48,8 @@ export class UnlockCommand extends Command {
         .setFooter({text: `2022 ${this.client.user?.username}`})
     
     ] });
+  } catch (error) {
+    console.log(error);
   }
+} 
 }

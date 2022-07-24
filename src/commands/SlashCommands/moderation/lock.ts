@@ -35,7 +35,8 @@ export class LockCommand extends Command {
       ephemeral: true,
     });
 
-    channel.send({ embeds: [new MessageEmbed()
+    channel.send({ embeds: [
+      new MessageEmbed()
         .setTitle("Ce salon est vérouillé.")
         .setDescription(`Vous ne pouvez plus y envoyer de message.`)
         .setColor("#8e48f7")
