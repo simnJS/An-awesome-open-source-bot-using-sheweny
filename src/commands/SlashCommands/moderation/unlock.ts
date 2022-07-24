@@ -31,7 +31,7 @@ export class UnlockCommand extends Command {
       return;
     }
 
-    channel.permissionOverwrites.edit(interaction.guild!.id, {
+    await channel.permissionOverwrites.edit(interaction.guild!.id, {
       SEND_MESSAGES: true,
       ADD_REACTIONS: true,
     });
@@ -41,7 +41,7 @@ export class UnlockCommand extends Command {
       ephemeral: true,
     });
 
-    await channel.send({ embeds: [new MessageEmbed()
+    channel.send({ embeds: [new MessageEmbed()
         .setTitle("Ce salon est désormais dévérouillé.")
         .setDescription(`Vous pouvez de nouveaux écrire des messages ici.`)
         .setColor("#8e48f7")
