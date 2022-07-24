@@ -103,9 +103,9 @@ export class WarnCommand extends Command {
             const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.modChannel) as TextChannel)
 
             if (!interaction.channel) return;
-            if (settings.logs === false) return;
+            if (settings.logs === true) {
             await logChannel.send(`${interaction.user.username} a averti ${user_add.user.tag} pour la raison ${reason}`);
-
+        }
             try {
                 user_add.send({embeds: [new MessageEmbed(
                     new MessageEmbed()
