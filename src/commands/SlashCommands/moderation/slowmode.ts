@@ -50,7 +50,7 @@ export class SlowmodeCommand extends Command {
     const logChannel = await (interaction.guild!.channels.cache.find(c => c.id === settings.modChannel) as TextChannel)
 
     if (!interaction.channel) return;
-
+    if (!logChannel) return;
     await logChannel.send(`${interaction.user.username} a activé le slowmode sur le salon ${interaction.channel.id}`);
   }
 }
