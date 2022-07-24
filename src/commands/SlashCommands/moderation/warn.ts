@@ -106,6 +106,12 @@ export class WarnCommand extends Command {
             if (settings.logs === false) return;
             await logChannel.send(`${interaction.user.username} a averti ${user_add.user.tag} pour la raison ${reason}`);
 
+            await user_add.send({
+                content: `Vous avez été warn sur le serveur ${interaction.guild!.name} !`,
+                embeds: [embed],
+            });
+
+
         }
 
         if (option == "remove") {

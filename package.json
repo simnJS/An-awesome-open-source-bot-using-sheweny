@@ -18,15 +18,13 @@
     "axios": "^0.27.2",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.1",
-    "js-yaml": "^4.1.0",
     "moment": "^2.29.3",
     "mongoose": "^6.4.0",
     "nodemon": "^2.0.16",
     "sheweny": "^3.4.2",
     "ts-node": "^10.8.0",
     "tslint": "^5.12.1",
-    "typescript": "4.6.3",
-    "yaml": "^2.1.1"
+    "typescript": "4.6.3"
   },
   "keywords": [],
   "author": "",
