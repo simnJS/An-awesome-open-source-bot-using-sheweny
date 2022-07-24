@@ -49,18 +49,18 @@ export class ConfigCommand extends Command {
                     ],
                 }, {
                     name: "welcome",
-                    description: "La configuration en rapport avec les bienvenues.",
+                    description: "La configuration en rapport avec les messages de bienvenues.",
                     type: "SUB_COMMAND",
                     options: [
                         {
                             name: "status",
-                            description: "Vous permet d'activer ou de désactiver les bienvenues sur le serveur.",
+                            description: "Vous permet d'activer ou de désactiver les messages de bienvenues sur le serveur.",
                             type: "BOOLEAN",
                             required: true,
                         },
                         {
                             name: "channel",
-                            description: "Le salon dans lequel les bienvenues seront envoyés.",
+                            description: "Le salon dans lequel les messages de bienvenues seront envoyés.",
                             type: "CHANNEL",
                             required: true,
                         },
@@ -153,15 +153,15 @@ export class ConfigCommand extends Command {
             let reponse: string[] = [];
             if (status == true) {
                 this.client.db.update(interaction.guild!.id, { welcome: 'true' })
-                reponse.push("Les bienvenues sont maintenant activés.")
+                reponse.push("Les messages de bienvenues sont maintenant activés.")
             }
             if (status == false) {
                 this.client.db.update(interaction.guild!.id, { welcome: 'false' })
-                reponse.push("Les bienvenues sont maintenant désactivés.")
+                reponse.push("Les messages de bienvenues sont maintenant désactivés.")
             }
             if (channel) {
                 this.client.db.update(interaction.guild!.id, { welcomeChannel: channel.id })
-                reponse.push("Le salon des bienvenues a bien été changé.")
+                reponse.push("Le salon des messages de bienvenues a bien été changé.")
             }
             interaction.reply(reponse.join("\n"))
         }

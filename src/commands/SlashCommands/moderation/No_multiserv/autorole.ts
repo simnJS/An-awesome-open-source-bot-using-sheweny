@@ -1,6 +1,7 @@
 import { ShewenyClient, Command } from "sheweny";
 import {
   CommandInteraction,
+  Message,
   MessageActionRow,
   MessageSelectMenu
 
@@ -12,14 +13,14 @@ export class AutoRoleCommand extends Command {
     super(client, {
       name: "autorole_deploy",
       description: "déploiment de l'autorole.",
-      type: "SLASH_COMMAND",
+      type: "MESSAGE_COMMAND",
       category: "Moderation",
       cooldown: 0,
       adminsOnly: true,
     });
   }
 
-  async execute(interaction: CommandInteraction) {
+  async execute(message : Message) {
 
 
 		// START EMOJI
@@ -112,8 +113,7 @@ export class AutoRoleCommand extends Command {
                 ]),
         );
 
-    await interaction.reply({ content: 'Succesfully send', ephemeral:true });
-    await interaction.channel?.send({ content: 'Choisissez vos rôles ci dessous !', components: [row] });
+    await message.channel?.send({ content: 'Choisissez vos rôles ci dessous !', components: [row] });
 
 
 }

@@ -35,7 +35,7 @@ export class UnlockCommand extends Command {
     const raw = new MessageActionRow()
       .addComponents(
         new MessageButton()
-          .setCustomId(`verif--${interaction.user.id}`)
+          .setCustomId(`verif`)
           .setLabel(`Vérifier`)
           .setStyle('PRIMARY')
       )

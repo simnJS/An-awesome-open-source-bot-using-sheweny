@@ -11,14 +11,15 @@ const { Button } = require("sheweny");
 
 module.exports = class Btns extends Button {
   constructor(client: ShewenyClient) {
-    super(client, [/verif--[0-9]{15,18}$/]);
+    super(client, [`verif`]);
+
   }
 
   async execute(button: ButtonInteraction) {
     const settings = await this.client.db.get(button.guild!.id);
     const role = settings.verificationRole
     let roleToAdd = button.guild!.roles.cache.find(r => r.id === `${role}`) as RoleResolvable
-    const userid = button.customId.split("--")[1];
+    const userid = button.member!.user.id;
     const user = await button.guild?.members.fetch(userid) as GuildMember;
     (user?.roles as GuildMemberRoleManager).add(roleToAdd);
     await button.reply({content: "L'utilisateur a été verifié.", ephemeral: true});
