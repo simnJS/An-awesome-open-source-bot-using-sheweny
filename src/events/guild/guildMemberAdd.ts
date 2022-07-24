@@ -16,6 +16,7 @@ export class GuildMemberAddEvent extends Event {
   }
 
   async execute(member: GuildMember) {
+    try {
     const settings = await this.client.db.get(member.guild!.id);
     if (settings.welcome === true) {
       const channel = await (member.guild!.channels.cache.find(
@@ -53,5 +54,8 @@ export class GuildMemberAddEvent extends Event {
         console.log(e);
       }
     }
+  } catch (e) {
+    console.log(e);
   }
+}
 }
