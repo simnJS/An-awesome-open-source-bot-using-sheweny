@@ -106,10 +106,18 @@ export class WarnCommand extends Command {
             if (settings.logs === false) return;
             await logChannel.send(`${interaction.user.username} a averti ${user_add.user.tag} pour la raison ${reason}`);
 
-            await user_add.send({
-                content: `Vous avez été warn sur le serveur ${interaction.guild!.name} !`,
-                embeds: [embed],
-            });
+            try {
+                user_add.send({embeds: [new MessageEmbed(
+                    new MessageEmbed()
+                    .setTitle(`Vous avez été warn sur le serveur ${interaction.guild!.name}.`)
+                    .setDescription(`Raison: ${reason} ! `)
+                    .setColor("#8e48f7")
+                    .setFooter({ text: `Sanction appliqué par ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
+                    .setTimestamp()
+                )]})
+            }   catch (e) {
+                console.log(e);
+            }
 
 
         }
@@ -148,21 +156,6 @@ export class WarnCommand extends Command {
 
             for (let warn of filteredUser) {
                 warnList += `\n**${warn.case}** - Par \`${warn.moderator}\` - (le ${warn.date}). Raison: \`${warn.reason}\``;
-            }
-
-
-
-            try {
-                user_add.send({embeds: [new MessageEmbed(
-                    new MessageEmbed()
-                    .setTitle(`Vous avez été warn sur le serveur ${interaction.guild!.name}.`)
-                    .setDescription(`Raison: ${reason} ! `)
-                    .setColor("#8e48f7")
-                    .setFooter({ text: `Sanction appliqué par ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
-                    .setTimestamp()
-                )]})
-            }   catch (e) {
-                console.log(e);
             }
             await interaction.reply(warnList);
         }
