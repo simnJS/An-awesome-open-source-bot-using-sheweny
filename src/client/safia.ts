@@ -27,7 +27,7 @@ export default class Safia extends ShewenyClient {
         status: "online",
         activities: [
           {
-            name: "Safia bot",
+            name: "https://safia-bot.xyz/",
             type: "WATCHING",
           },
         ],
