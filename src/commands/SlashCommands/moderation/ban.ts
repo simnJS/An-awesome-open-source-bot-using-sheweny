@@ -82,9 +82,9 @@ export class BanCommand extends Command {
     await this.client.db.update(`${interaction.guild!.id}`, { bans: banArray });
 
     interaction.reply({ embeds: [embed], components: [raw], ephemeral: true })
-    // await guildMember.ban({
-    //   reason: reason!,
-    // });
+    await guildMember.ban({
+      reason: reason!,
+    });
 
 
 
