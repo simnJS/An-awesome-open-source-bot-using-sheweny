@@ -17,12 +17,12 @@ export class GuildMemberAddEvent extends Event {
 
   async execute(member: GuildMember) {
     const settings = await this.client.db.get(member.guild!.id);
-    console.log(settings.welcome)
     try {
-      if (settings.welcome === false) return
+      if (settings.welcome === true) {
         const channel = await (member.guild!.channels.cache.find(
           (c) => c.id === settings.welcomeChannel
         ) as TextChannel);
+
         if (!channel) return;
 
         const embed = new MessageEmbed()
@@ -42,6 +42,7 @@ export class GuildMemberAddEvent extends Event {
           .setColor("#FEE75C")
           .setTimestamp();
         await channel.send({ embeds: [embed] });
+      }
     } catch (e) {
       console.log(e);
     }
