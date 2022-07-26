@@ -16,32 +16,37 @@ export class GuildMemberAddEvent extends Event {
   }
 
   async execute(member: GuildMember) {
-    try {
     const settings = await this.client.db.get(member.guild!.id);
-    if (settings.welcome === true) {
-      const channel = await (member.guild!.channels.cache.find(
-        (c) => c.id === settings.welcomeChannel
-      ) as TextChannel);
+    try {
+      if (settings.welcome === true) {
+        const channel = await (member.guild!.channels.cache.find(
+          (c) => c.id === settings.welcomeChannel
+        ) as TextChannel);
 
-      if (!channel) return;
+        if (!channel) return;
 
-      const embed = new MessageEmbed()
-        .setTitle(`${member.user.username} vient de rejoindre le serveur !`)
-        .setDescription(
-          `Nous sommes maintenant ${member.guild!.memberCount
-          } membres sur le serveur.`
-        )
-        .setImage(
-          member.user.displayAvatarURL({
-            format: "png",
-            dynamic: true,
-            size: 1024,
-          })
-        )
-        .setColor("#FEE75C")
-        .setTimestamp();
-      await channel.send({ embeds: [embed] });
+        const embed = new MessageEmbed()
+          .setTitle(`${member.user.username} vient de rejoindre le serveur !`)
+          .setDescription(
+            `Nous sommes maintenant ${
+              member.guild!.memberCount
+            } membres sur le serveur.`
+          )
+          .setImage(
+            member.user.displayAvatarURL({
+              format: "png",
+              dynamic: true,
+              size: 1024,
+            })
+          )
+          .setColor("#FEE75C")
+          .setTimestamp();
+        await channel.send({ embeds: [embed] });
+      }
+    } catch (e) {
+      console.log(e);
     }
+
     if (settings.autorole === "true") {
       try {
         const role = settings.autoroleRole;
@@ -54,8 +59,5 @@ export class GuildMemberAddEvent extends Event {
         console.log(e);
       }
     }
-  } catch (e) {
-    console.log(e);
   }
-}
 }
