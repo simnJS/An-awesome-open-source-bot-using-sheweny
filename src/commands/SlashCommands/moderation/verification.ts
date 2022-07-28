@@ -42,7 +42,7 @@ export class UnlockCommand extends Command {
 
                 
 
-    await interaction.reply({ content: 'Succesfully send', ephemeral:true });
-    await interaction.channel?.send({ content: 'Cliquer sur le bouton ci-dessous pour passer la vérification !', components: [raw] });
+    await interaction.reply({ content: 'Succesfully send', ephemeral:true })
+    await interaction.channel?.send({ content: 'Cliquer sur le bouton ci-dessous pour passer la vérification !', components: [raw] }).catch(() => {interaction.reply("Une erreur est survenue.")});
   }
 }
