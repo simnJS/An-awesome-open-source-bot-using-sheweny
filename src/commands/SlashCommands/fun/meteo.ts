@@ -44,7 +44,6 @@ export class DogCommand extends Command {
                 { name: "Précipitation", value: `\`\`\`${res.current.precip} mm\`\`\``, inline: true },
                 { name: "Visibilité", value: `\`\`\`${res.current.visibility} km\`\`\``, inline: true },
                 { name: "Ciel", value: `\`\`\`${res.current.weather_descriptions[0]}\`\`\``, inline: true },
-                { name: "Vent", value: `\`\`\`${res.current.wind_dirrection}\`\`\``, inline: true },
                 { name: "Vitesse du vent", value: `\`\`\`${res.current.wind_speed} km/h\`\`\``, inline: true },
                 { name: "Direction du vent", value: `\`\`\`${res.current.wind_degree}\`\`\``, inline: true },
             )
