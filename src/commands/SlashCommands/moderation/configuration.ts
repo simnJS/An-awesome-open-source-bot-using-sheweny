@@ -106,6 +106,7 @@ export class ConfigCommand extends Command {
         });
     }
     async execute(interaction: CommandInteraction) {
+        console.log('Commande config')
         switch ((interaction.options as CommandInteractionOptionResolver).getSubcommand()) {
         case "logs":
             const status = (interaction.options as CommandInteractionOptionResolver).getBoolean("status");

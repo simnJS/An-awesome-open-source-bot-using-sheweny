@@ -20,6 +20,7 @@ export class UnlockCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    
 
     const settings = await this.client.db.get(interaction.guild!.id);
 

@@ -29,6 +29,7 @@ export class BanCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    console.log("Commande ban");
     const guildMember = (interaction.options as CommandInteractionOptionResolver).getMember("user") as GuildMember;
     const reason = (interaction.options as CommandInteractionOptionResolver).getString("reason");
 

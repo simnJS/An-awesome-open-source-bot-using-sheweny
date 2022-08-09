@@ -28,6 +28,7 @@ export class SlowmodeCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    console.log("Commande slowmode");
     const time = interaction.options.get("temps")?.value as number;
 
     if (time! == 0) {

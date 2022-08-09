@@ -20,6 +20,7 @@ export class GithubCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    console.log("Commande source-code");
     interaction.reply({
       embeds: [new EmbedBuilder()
         .setTitle("Lien vers le code source du bot.")

@@ -21,6 +21,7 @@ export class UnlockCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    console.log("Commande unlock");
     const channel = interaction.channel as TextChannel;
 
 

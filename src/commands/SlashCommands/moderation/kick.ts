@@ -36,6 +36,7 @@ export class KickCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    console.log("Commande kick");
     const guildMember = (interaction.options as CommandInteractionOptionResolver).getMember("user") as GuildMember;
     const reason = (interaction.options as CommandInteractionOptionResolver).getString("reason");
     const notification = (interaction.options as CommandInteractionOptionResolver).getBoolean("notification");

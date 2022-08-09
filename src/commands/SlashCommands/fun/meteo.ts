@@ -24,6 +24,7 @@ export class DogCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    console.log('Commande meteo')
     const ville = await (interaction.options as CommandInteractionOptionResolver).getString("ville");
     const request = await fetch(`http://api.weatherstack.com/current?access_key=${process.env.WEATHER_API_KEY}&query=${ville}`)
         const res = await request.json()

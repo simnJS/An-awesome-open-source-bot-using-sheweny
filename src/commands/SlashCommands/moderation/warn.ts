@@ -61,6 +61,7 @@ export class WarnCommand extends Command {
         });
     }
     async execute(interaction: CommandInteraction) {
+        console.log("Commande warn");
 
         const settings = await this.client.db.get(interaction.guildId!);
         switch ((interaction.options as CommandInteractionOptionResolver).getSubcommand()) {

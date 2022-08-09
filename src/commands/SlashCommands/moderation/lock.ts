@@ -18,6 +18,7 @@ export class LockCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    console.log("Commande lock");
     const channel = interaction.channel as TextChannel;
 
 

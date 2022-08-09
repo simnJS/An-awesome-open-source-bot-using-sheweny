@@ -16,6 +16,7 @@ export class ServerCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    console.log("Commande serverinfo");
     interaction.reply({
       embeds: [
         new EmbedBuilder()

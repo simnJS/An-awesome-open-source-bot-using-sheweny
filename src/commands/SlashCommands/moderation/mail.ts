@@ -44,10 +44,12 @@ export class MailCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    
     const user = (interaction.options as CommandInteractionOptionResolver).getUser("user");
     const message = (interaction.options as CommandInteractionOptionResolver).getString("message");
     if ((interaction.options as CommandInteractionOptionResolver).getBoolean("anonyme") == false) {
       try {
+        console.log('Commande mail')
         
         user!.send({
           embeds: [
@@ -72,6 +74,7 @@ export class MailCommand extends Command {
 
     if ((interaction.options.get("anonyme")?.value as boolean) == false) {
       try {
+        console.log('Commande mail')
         user!.send({
           embeds: [
             new EmbedBuilder()

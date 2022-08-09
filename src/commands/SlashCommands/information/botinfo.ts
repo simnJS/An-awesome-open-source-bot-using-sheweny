@@ -16,6 +16,7 @@ export class InfoCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
+    console.log('Commande botinfo')
     interaction.reply({
       embeds: [
         new EmbedBuilder()

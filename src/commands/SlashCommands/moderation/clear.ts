@@ -30,6 +30,7 @@ export class ClearCommand extends Command {
     }
 
     async execute(interaction: CommandInteraction) {
+        console.log("Commande clear");
         const nombre = (interaction.options as CommandInteractionOptionResolver).getNumber("message")!;
 
         if (nombre > 100) {

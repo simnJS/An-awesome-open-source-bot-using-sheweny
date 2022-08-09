@@ -16,7 +16,7 @@ export class DogCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
-
+    console.log('Commande dog')
     const response = await fetch("https://dog.ceo/api/breeds/image/random")
     const body = await response.json()
 
