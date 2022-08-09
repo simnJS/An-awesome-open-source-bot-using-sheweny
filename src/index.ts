@@ -1,7 +1,6 @@
 import { CommandInteraction, Message } from "discord.js";
 import mongoose from "mongoose";
 import type { DatabaseProvider } from "././utils/Database";
-import type { ContextMenuInteraction } from "discord.js";
 import dotenv  from "dotenv";
 dotenv.config();
 declare module "sheweny" {
@@ -42,7 +41,7 @@ mongoose.connection.on("error", () => {
 });
 client.managers.commands!.on(
   "cooldownLimit",
-  (interaction: CommandInteraction | ContextMenuInteraction | Message) => {
+  (interaction: CommandInteraction | Message) => {
     interaction.reply({
       content: "Please slow down",
       ephemeral: true,

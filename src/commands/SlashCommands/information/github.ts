@@ -1,7 +1,7 @@
 import { ShewenyClient, Command } from "sheweny";
 import {
   CommandInteraction,
-  MessageEmbed,
+  EmbedBuilder,
   GuildMember,
   Message,
   BaseGuildTextChannel,
@@ -15,12 +15,13 @@ export class GithubCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Information",
       cooldown: 10,
+      clientPermissions: ["SendMessages"],
     });
   }
 
   async execute(interaction: CommandInteraction) {
     interaction.reply({
-      embeds: [new MessageEmbed()
+      embeds: [new EmbedBuilder()
         .setTitle("Lien vers le code source du bot.")
         .setColor("#0099ff")
         .addFields(

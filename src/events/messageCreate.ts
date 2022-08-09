@@ -1,6 +1,6 @@
 import { Event } from "sheweny";
 import type { ShewenyClient } from "sheweny";
-import { Message, TextChannel, MessageEmbed } from "discord.js";
+import { Message, TextChannel, EmbedBuilder } from "discord.js";
 
 export class MessageCreateEvent extends Event {
   constructor(client: ShewenyClient) {
@@ -20,7 +20,7 @@ export class MessageCreateEvent extends Event {
     if (message.channel === channel) {
       const threadAuthor = message.member!.displayName;
 
-      const suggestEmbed = new MessageEmbed()
+      const suggestEmbed = new EmbedBuilder()
         .setColor('#FEE75C')
         .setTitle(`Nouvelle suggestion de ${message.author.username}`)
         .setDescription(message.content)
@@ -32,7 +32,7 @@ export class MessageCreateEvent extends Event {
         message.react("👎")
         message.startThread({
           name: `${threadAuthor}-suggestion`,
-          autoArchiveDuration: "MAX",
+          autoArchiveDuration: 4320,
         });
       });
 

@@ -1,5 +1,5 @@
 import { ShewenyClient, Command } from "sheweny";
-import { CommandInteraction, MessageEmbed, GuildMember, version } from "discord.js";
+import { CommandInteraction, EmbedBuilder, GuildMember, version } from "discord.js";
 import { timeformat } from "../../../utils/miscutils"
 import dotenv from "dotenv";
 dotenv.config();
@@ -11,14 +11,14 @@ export class InfoCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Informations",
       cooldown: 10,
-      clientPermissions: ["SEND_MESSAGES"],
+      clientPermissions: ["SendMessages"],
     });
   }
 
   async execute(interaction: CommandInteraction) {
     interaction.reply({
       embeds: [
-        new MessageEmbed()
+        new EmbedBuilder()
           .setTitle("Informations sur le bot.")
           .setColor("#0099ff")
           .addFields(

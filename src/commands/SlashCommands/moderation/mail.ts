@@ -1,10 +1,12 @@
 import { ShewenyClient, Command } from "sheweny";
 import {
   CommandInteraction,
-  MessageEmbed,
+  EmbedBuilder,
   GuildMember,
   Message,
-  TextChannel
+  TextChannel,
+  ApplicationCommandOptionType,
+  CommandInteractionOptionResolver
 } from "discord.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -16,25 +18,25 @@ export class MailCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Moderation",
       cooldown: 10,
-      userPermissions: ["ADMINISTRATOR"],
-      clientPermissions: ["SEND_MESSAGES"],
+      userPermissions: ["Administrator"],
+      clientPermissions: ["SendMessages"],
       options: [
         {
           name: "user",
           description: "L'utilisateur à qui envoyer le message.",
-          type: "USER",
+          type: ApplicationCommandOptionType.User,
           required: true,
         },
         {
           name: "message",
           description: "Le message à envoyer.",
-          type: "STRING",
+          type: ApplicationCommandOptionType.String,
           required: true,
         },
         {
           name: "anonyme",
           description: "Envoyer le message anonymement.",
-          type: "BOOLEAN",
+          type:ApplicationCommandOptionType.Boolean,
           required: true,
         }
       ],
@@ -42,16 +44,16 @@ export class MailCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
-    const user = interaction.options.getUser("user");
-    const message = interaction.options.getString("message");
-    if (interaction.options.getBoolean("anonyme") == true) {
+    const user = (interaction.options as CommandInteractionOptionResolver).getUser("user");
+    const message = (interaction.options as CommandInteractionOptionResolver).getString("message");
+    if ((interaction.options as CommandInteractionOptionResolver).getBoolean("anonyme") == false) {
       try {
         
         user!.send({
           embeds: [
-            new MessageEmbed()
+            new EmbedBuilder()
               .setTitle("Vous avez recu un mail !")
-              .setDescription(message!)
+              .setDescription(message)
               .setColor("#8e48f7")
               .setFooter({ text: `2022 ${this.client.user?.username}` }),
           ],
@@ -68,11 +70,11 @@ export class MailCommand extends Command {
     }
 
 
-    if (interaction.options.getBoolean("anonyme") == false) {
+    if ((interaction.options.get("anonyme")?.value as boolean) == false) {
       try {
         user!.send({
           embeds: [
-            new MessageEmbed()
+            new EmbedBuilder()
               .setTitle("Vous avez recu un mail de " + interaction.user.username + " !")
               .setDescription(message!)
               .setColor("#8e48f7")

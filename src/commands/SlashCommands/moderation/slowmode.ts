@@ -1,10 +1,9 @@
 import { ShewenyClient, Command } from "sheweny";
 import {
   CommandInteraction,
-  MessageEmbed,
-  GuildMember,
-  Message,
-  TextChannel
+  TextChannel,
+  ApplicationCommandOptionType,
+  CommandInteractionOptionResolver
 } from "discord.js";
 
 export class SlowmodeCommand extends Command {
@@ -15,13 +14,13 @@ export class SlowmodeCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Moderation",
       cooldown: 0,
-      userPermissions: ["MANAGE_CHANNELS"],
-      clientPermissions: ["MANAGE_CHANNELS"],
+      userPermissions: ["ManageChannels"],
+      clientPermissions: ["ManageChannels"],
       options: [
         {
             name: "temps",
             description: "Le temps du slowmode.",
-            type: "NUMBER",
+            type: ApplicationCommandOptionType.Number,
             required: true,
         }
       ]
@@ -29,7 +28,7 @@ export class SlowmodeCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
-    const time = interaction.options.getNumber("temps");
+    const time = interaction.options.get("temps")?.value as number;
 
     if (time! == 0) {
         await (interaction.channel as TextChannel).setRateLimitPerUser(0);

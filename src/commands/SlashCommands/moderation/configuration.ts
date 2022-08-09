@@ -1,5 +1,5 @@
 import { ShewenyClient, Command } from "sheweny";
-import { CommandInteraction, MessageEmbed, GuildMember, TextChannel } from "discord.js";
+import { CommandInteraction, TextChannel, ApplicationCommandOptionType, Role, CommandInteractionOptionResolver } from "discord.js";
 export class ConfigCommand extends Command {
     constructor(client: ShewenyClient) {
         super(client, {
@@ -8,23 +8,23 @@ export class ConfigCommand extends Command {
             type: "SLASH_COMMAND",
             category: "Moderation",
             cooldown: 0,
-            userPermissions: ["ADMINISTRATOR"],
+            userPermissions: ["Administrator"],
             options: [
                 {
                     name: "logs",
                     description: "La configuration en rapport avec les logs.",
-                    type: "SUB_COMMAND",
+                    type: ApplicationCommandOptionType.Subcommand,
                     options: [
                         {
                             name: "status",
                             description: "Vous permet d'activer ou de désactiver les logs sur le serveur.",
-                            type: "BOOLEAN",
+                            type: ApplicationCommandOptionType.Boolean,
                             required: true,
                         },
                         {
                             name: "channel",
                             description: "Le salon dans lequel les logs seront envoyés.",
-                            type: "CHANNEL",
+                            type: ApplicationCommandOptionType.Channel,
                             required: true,
                         },
                     ],
@@ -32,72 +32,72 @@ export class ConfigCommand extends Command {
                 {
                     name: "suggestion",
                     description: "La configuration en rapport avec les suggestions.",
-                    type: "SUB_COMMAND",
+                    type: ApplicationCommandOptionType.Subcommand,
                     options: [
                         {
                             name: "status",
                             description: "Vous permet d'activer ou de désactiver les suggestions sur le serveur.",
-                            type: "BOOLEAN",
+                            type: ApplicationCommandOptionType.Boolean,
                             required: true,
                         },
                         {
                             name: "channel",
                             description: "Le salon dans lequel les suggestions seront envoyés.",
-                            type: "CHANNEL",
+                            type: ApplicationCommandOptionType.Channel,
                             required: true,
                         },
                     ],
                 }, {
                     name: "welcome",
                     description: "La configuration en rapport avec les messages de bienvenues.",
-                    type: "SUB_COMMAND",
+                    type: ApplicationCommandOptionType.Subcommand,
                     options: [
                         {
                             name: "status",
                             description: "Vous permet d'activer ou de désactiver les messages de bienvenues sur le serveur.",
-                            type: "BOOLEAN",
+                            type: ApplicationCommandOptionType.Boolean,
                             required: true,
                         },
                         {
                             name: "channel",
                             description: "Le salon dans lequel les messages de bienvenues seront envoyés.",
-                            type: "CHANNEL",
+                            type: ApplicationCommandOptionType.Channel,
                             required: true,
                         },
                     ],
                 }, {
                     name: "verification",
                     description: "la configuration en rapport avec la vérification.",
-                    type: "SUB_COMMAND",
+                    type: ApplicationCommandOptionType.Subcommand,
                     options: [
                         {
                             name: "status",
                             description: "Vous permet d'activer ou de désactiver la vérification sur le serveur.",
-                            type: "BOOLEAN",
+                            type: ApplicationCommandOptionType.Boolean,
                             required: true,
                         },
                         {
                             name: "role",
                             description: "Le role qui sera utilisé pour la vérification.",
-                            type: "ROLE",
+                            type: ApplicationCommandOptionType.Role,
                             required: true,
                         },
                     ],
                 }, {
                     name: "autorole",
                     description: "la configuration en rapport avec l'autorole'.",
-                    type: "SUB_COMMAND",
+                    type: ApplicationCommandOptionType.Subcommand,
                     options: [
                         {
                             name: "status",
                             description: "Vous permet d'activer ou de désactiver l'autorole.",
-                            type: "BOOLEAN",
+                            type: ApplicationCommandOptionType.Boolean,
                             required: true,
                         },
                         {
                             name: "role",
                             description: "Le role qui sera utilisé pour l'autorole'.",
-                            type: "ROLE",
+                            type: ApplicationCommandOptionType.Role,
                             required: true,
                         },
                     ],
@@ -106,10 +106,10 @@ export class ConfigCommand extends Command {
         });
     }
     async execute(interaction: CommandInteraction) {
-        const option = interaction.options.getSubcommand()
-        if (option === "logs") {
-            const status = interaction.options.getBoolean("status");
-            const channel = interaction.options.getChannel("channel") as TextChannel;
+        switch ((interaction.options as CommandInteractionOptionResolver).getSubcommand()) {
+        case "logs":
+            const status = (interaction.options as CommandInteractionOptionResolver).getBoolean("status");
+            const channel = ((interaction.options as CommandInteractionOptionResolver).getChannel("channel") as TextChannel);
             let reponse: string[] = [];
             if (status == true) {
                 this.client.db.update(interaction.guild!.id, { logs: 'true' })
@@ -126,83 +126,85 @@ export class ConfigCommand extends Command {
                 reponse.push("Le salon des logs a bien été changé.")
             }
             interaction.reply(reponse.join("\n"))
-        }
-        if (option === "suggestion") {
-            const status = interaction.options.getBoolean("status");
-            const channel = interaction.options.getChannel("channel") as TextChannel;
-            let reponse: string[] = [];
-            if (status == true) {
+        break
+        case "suggestion":
+            const status1 = (interaction.options as CommandInteractionOptionResolver).getBoolean("status");
+            const channel1 = ((interaction.options as CommandInteractionOptionResolver).getChannel("channel") as TextChannel);
+            let reponse1: string[] = [];
+            if (status1 == true) {
                 this.client.db.update(interaction.guild!.id, { suggestion: 'true' })
-                reponse.push("Les suggestions sont maintenant activés.")
+                reponse1.push("Les suggestions sont maintenant activés.")
 
             }
-            if (status == false) {
+            if (status1 == false) {
                 this.client.db.update(interaction.guild!.id, { suggestion: 'false' })
-                reponse.push("Les suggestions sont maintenant désactivés.")
+                reponse1.push("Les suggestions sont maintenant désactivés.")
             }
 
-            if (channel) {
-                this.client.db.update(interaction.guild!.id, { suggestChannel: channel.id })
-                reponse.push("Le salon des suggestions a bien été changé.")
+            if (channel1) {
+                this.client.db.update(interaction.guild!.id, { suggestChannel: channel1.id })
+                reponse1.push("Le salon des suggestions a bien été changé.")
             }
-            interaction.reply(reponse.join("\n"))
-        }
-        if (option === "welcome") {
-            const status = interaction.options.getBoolean("status");
-            const channel = interaction.options.getChannel("channel") as TextChannel;
-            let reponse: string[] = [];
-            if (status == true) {
+            interaction.reply(reponse1.join("\n"))
+        
+        break
+        case "welcome":
+            const status2 = (interaction.options as CommandInteractionOptionResolver).getBoolean("status");
+            const channel2 = ((interaction.options as CommandInteractionOptionResolver).getChannel("channel") as TextChannel);
+            let reponse2: string[] = [];
+            if (status2 == true) {
                 this.client.db.update(interaction.guild!.id, { welcome: 'true' })
-                reponse.push("Les messages de bienvenues sont maintenant activés.")
+                reponse2.push("Les messages de bienvenues sont maintenant activés.")
             }
-            if (status == false) {
+            if (status2 == false) {
                 this.client.db.update(interaction.guild!.id, { welcome: 'false' })
-                reponse.push("Les messages de bienvenues sont maintenant désactivés.")
+                reponse2.push("Les messages de bienvenues sont maintenant désactivés.")
             }
-            if (channel) {
-                this.client.db.update(interaction.guild!.id, { welcomeChannel: channel.id })
-                reponse.push("Le salon des messages de bienvenues a bien été changé.")
+            if (channel2) {
+                this.client.db.update(interaction.guild!.id, { welcomeChannel: channel2.id })
+                reponse2.push("Le salon des messages de bienvenues a bien été changé.")
             }
-            interaction.reply(reponse.join("\n"))
-        }
-
-        if (option === "verification") {
-            const status = interaction.options.getBoolean("status");
-            const role = interaction.options.getRole("role")!
-            let reponse: string[] = [];
-            if (status == true) {
+            interaction.reply(reponse2.join("\n"))
+        break
+        case "verification":
+            const status3 = (interaction.options as CommandInteractionOptionResolver).getBoolean("status");
+            const role = (interaction.options as CommandInteractionOptionResolver).getRole("role") as Role;
+            let reponse3: string[] = [];
+            if (status3 == true) {
                 this.client.db.update(interaction.guild!.id, { verification: 'true' })
-                reponse.push("La vérification est maintenant activé.")
+                reponse3.push("La vérification est maintenant activé.")
             }
-            if (status == false) {
+            if (status3 == false) {
                 this.client.db.update(interaction.guild!.id, { verification: 'false' })
-                reponse.push("La vérification est maintenant désactivé.")
+                reponse3.push("La vérification est maintenant désactivé.")
             }
             if (role) {
                 this.client.db.update(interaction.guild!.id, { verificationRole: role.id })
-                console.log(role.id)
-                reponse.push("Le role de vérification a bien été changer.")
+
+                reponse3.push("Le role de vérification a bien été changer.")
             }
-            interaction.reply(reponse.join("\n"))
-        }
-        if (option === "autorole") {
-            const status = interaction.options.getBoolean("status");
-            const role = interaction.options.getRole("role")!
-            let reponse: string[] = [];
-            if (status == true) {
+            interaction.reply(reponse3.join("\n"))
+        break
+        case "autorole":
+            const status4 = (interaction.options as CommandInteractionOptionResolver).getBoolean("status");
+            const role2 = (interaction.options as CommandInteractionOptionResolver).getRole("role") as Role;
+            let reponse4: string[] = [];
+            if (status4 == true) {
                 this.client.db.update(interaction.guild!.id, { autorole: 'true' })
-                reponse.push("L'autorole' est maintenant activé.")
+                reponse4.push("L'autorole' est maintenant activé.")
             }
-            if (status == false) {
+            if (status4 == false) {
                 this.client.db.update(interaction.guild!.id, { autorole: 'false' })
-                reponse.push("L'autorole est maintenant désactivé.")
+                reponse4.push("L'autorole est maintenant désactivé.")
             }
-            if (role) {
-                this.client.db.update(interaction.guild!.id, { autoroleRole: role.id })
-                console.log(role.id)
-                reponse.push("Le role de l'autorole a bien été changer.")
+            if (role2) {
+                this.client.db.update(interaction.guild!.id, { autoroleRole: role2.id })
+
+                reponse4.push("Le role de l'autorole a bien été changer.")
             }
-            interaction.reply(reponse.join("\n"))
+            interaction.reply(reponse4.join("\n"))
+
+        break
         }
     }
 }

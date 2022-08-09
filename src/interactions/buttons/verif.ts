@@ -3,8 +3,8 @@ import { ShewenyClient } from "sheweny";
 
 const {
   Interaction,
-  MessageEmbed,
-  MessageActionRow,
+  EmbedBuilder,
+  ActionRowBuilder,
   MessageButton,
 } = require("discord.js");
 const { Button } = require("sheweny");

@@ -1,5 +1,5 @@
 import { ShewenyClient, Command } from "sheweny";
-import { CommandInteraction, MessageEmbed, GuildMember, TextChannel, MessageActionRow, MessageButton } from "discord.js";
+import { CommandInteraction, EmbedBuilder, GuildMember, TextChannel, ActionRowBuilder, ButtonBuilder, ApplicationCommandOptionType, ButtonStyle, CommandInteractionOptionResolver } from "discord.js";
 import moment from "moment";
 export class BanCommand extends Command {
   constructor(client: ShewenyClient) {
@@ -9,19 +9,19 @@ export class BanCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Moderation",
       cooldown: 0,
-      userPermissions: ["BAN_MEMBERS"],
-      clientPermissions: ["BAN_MEMBERS"],
+      userPermissions: ["BanMembers"],
+      clientPermissions: ["BanMembers"],
       options: [
         {
           name: "user",
           description: "L'utilisateur à bannir.",
-          type: "USER",
+          type: ApplicationCommandOptionType.User,
           required: true,
         },
         {
           name: "reason",
           description: "La raison du ban.",
-          type: "STRING",
+          type: ApplicationCommandOptionType.String,
           required: true,
         },
       ],
@@ -29,9 +29,8 @@ export class BanCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
-    const user = interaction.options.getMember("user")!
-    const guildMember = user as GuildMember;
-    const reason = interaction.options.getString("reason")!;
+    const guildMember = (interaction.options as CommandInteractionOptionResolver).getMember("user") as GuildMember;
+    const reason = (interaction.options as CommandInteractionOptionResolver).getString("reason");
 
     const settings = await this.client.db.get(interaction.guild!.id);
     if (!guildMember.bannable) {
@@ -42,7 +41,7 @@ export class BanCommand extends Command {
     try {
       await guildMember.send({
         embeds: [
-          new MessageEmbed()
+          new EmbedBuilder()
             .setTitle(`Vous avez été banni du serveur ${interaction.guild!.name}.`)
             .setDescription(`Raison: ${reason} ! `)
             .setColor("#8e48f7")
@@ -54,18 +53,18 @@ export class BanCommand extends Command {
       err
     }
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(`Information`)
       .setDescription(`${guildMember.user.tag} a été banni pour la raison ${reason}.`)
       .setColor("#0099ff")
       .setTimestamp()
 
-    const raw = new MessageActionRow()
+    const raw = new ActionRowBuilder<ButtonBuilder>()
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId(`ban--${guildMember.id}`)
           .setLabel(`Unban ${guildMember.user.username}`)
-          .setStyle('DANGER')
+          .setStyle(ButtonStyle.Danger)
       )
     const banArray = settings.bans;
 
@@ -83,7 +82,7 @@ export class BanCommand extends Command {
 
     interaction.reply({ embeds: [embed], components: [raw], ephemeral: true })
     await guildMember.ban({
-      reason: reason!,
+      reason: `${reason}`,
     });
 
 

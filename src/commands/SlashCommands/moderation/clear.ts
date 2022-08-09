@@ -1,11 +1,10 @@
 import { ShewenyClient, Command } from "sheweny";
 import {
     CommandInteraction,
-    MessageEmbed,
-    GuildMember,
-    Message,
     BaseGuildTextChannel,
     TextChannel,
+    ApplicationCommandOptionType,
+    CommandInteractionOptionResolver
 } from "discord.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -17,13 +16,13 @@ export class ClearCommand extends Command {
             type: "SLASH_COMMAND",
             category: "Moderation",
             cooldown: 0,
-            userPermissions: ["MANAGE_MESSAGES"],
-            clientPermissions: ["MANAGE_MESSAGES"],
+            userPermissions: ["ManageMessages"],
+            clientPermissions: ["ManageMessages"],
             options: [
                 {
                     name: "message",
                     description: "Le nombre de message à supprimer.",
-                    type: "NUMBER",
+                    type: ApplicationCommandOptionType.Number,
                     required: true,
                 },
             ],
@@ -31,7 +30,7 @@ export class ClearCommand extends Command {
     }
 
     async execute(interaction: CommandInteraction) {
-        const nombre = interaction.options.getNumber("message")!;
+        const nombre = (interaction.options as CommandInteractionOptionResolver).getNumber("message")!;
 
         if (nombre > 100) {
             interaction.reply("Vous ne pouvez pas supprimer plus de 100 messages.");

@@ -1,5 +1,5 @@
 import { ShewenyClient, Command } from "sheweny";
-import { CommandInteraction, MessageEmbed } from "discord.js";
+import { CommandInteraction, EmbedBuilder } from "discord.js";
 import dotenv from "dotenv";
 import fetch from "node-fetch";
 dotenv.config();
@@ -11,7 +11,7 @@ export class DogCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Fun",
       cooldown: 15,
-      clientPermissions: ["SEND_MESSAGES"],
+      clientPermissions: ["SendMessages"],
     });
   }
 
@@ -28,7 +28,7 @@ export class DogCommand extends Command {
         }
 
     await interaction.reply({embeds: [
-        new MessageEmbed()
+        new EmbedBuilder()
             .setTitle("Voici un jolie chien pour vous !")
             .setImage(body.message)
             .setColor("#0099ff")

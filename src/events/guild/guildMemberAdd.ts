@@ -2,7 +2,7 @@ import { Event } from "sheweny";
 import type { ShewenyClient } from "sheweny";
 import {
   GuildMember,
-  MessageEmbed,
+  EmbedBuilder,
   TextChannel,
   RoleResolvable,
   GuildMemberRoleManager,
@@ -17,7 +17,7 @@ export class GuildMemberAddEvent extends Event {
 
   async execute(member: GuildMember) {
     const settings = await this.client.db.get(member.guild!.id);
-    console.log(settings.welcome)
+
     try {
       if (settings.welcome === false) return
         const channel = await (member.guild!.channels.cache.find(
@@ -25,7 +25,7 @@ export class GuildMemberAddEvent extends Event {
         ) as TextChannel);
         if (!channel) return;
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setTitle(`${member.user.username} vient de rejoindre le serveur !`)
           .setDescription(
             `Nous sommes maintenant ${
@@ -33,11 +33,7 @@ export class GuildMemberAddEvent extends Event {
             } membres sur le serveur.`
           )
           .setImage(
-            member.user.displayAvatarURL({
-              format: "png",
-              dynamic: true,
-              size: 1024,
-            })
+            member.user.displayAvatarURL({ extension: "png",  })
           )
           .setColor("#FEE75C")
           .setTimestamp();

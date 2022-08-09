@@ -1,7 +1,6 @@
 import { ShewenyClient } from "sheweny";
-import { Intents } from "discord.js";
+import { Partials } from "discord.js"
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import { DatabaseProvider } from "../utils/Database";
 dotenv.config();
 
@@ -14,21 +13,13 @@ export default class Safia extends ShewenyClient {
       allowedMentions: {
         parse: ["roles", "users"],
       },
-      intents: [
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MEMBERS,
-        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-        Intents.FLAGS.GUILD_MEMBERS,
-      ],
-      partials: ["CHANNEL", "MESSAGE", "REACTION", "USER", "GUILD_MEMBER"],
+      intents: ["Guilds", "GuildMembers", "GuildMessages"],
+      partials: [Partials.GuildMember],
       presence: {
         status: "online",
         activities: [
           {
             name: "safia-bot.xyz",
-            type: "WATCHING",
           },
         ],
       },
@@ -36,7 +27,6 @@ export default class Safia extends ShewenyClient {
         commands: {
           directory: "./commands",
           autoRegisterApplicationCommands: true,
-          loadAll: true,
           prefix: "!",
           default: {
             category: "Other",
@@ -46,19 +36,12 @@ export default class Safia extends ShewenyClient {
         },
         events: {
           directory: "./events",
-          loadAll: true,
-        },
-        inhibitors: {
-          directory: "./inhibitors",
-          loadAll: true,
         },
         selectMenus: {
           directory: "./interactions/selectmenus",
-          loadAll: true,
         },
         buttons: {
           directory: "./interactions/buttons",
-          loadAll: true,
         },
       },
     });

@@ -1,5 +1,5 @@
 import { ShewenyClient, Command } from "sheweny";
-import { CommandInteraction, MessageEmbed, GuildMember, TextChannel } from "discord.js";
+import { CommandInteraction, EmbedBuilder, GuildMember, TextChannel, ApplicationCommandOptionType,CommandInteractionOptionResolver } from "discord.js";
 import dotenv from "dotenv";
 dotenv.config();
 export class KickCommand extends Command {
@@ -10,25 +10,25 @@ export class KickCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Moderation",
       cooldown: 0,
-      userPermissions: ["KICK_MEMBERS"],
-      clientPermissions: ["KICK_MEMBERS"],
+      userPermissions: ["KickMembers"],
+      clientPermissions: ["KickMembers"],
       options: [
         {
           name: "user",
           description: "L'utilisateur à kick.",
-          type: "USER",
+          type: ApplicationCommandOptionType.User,
           required: true,
         },
         {
           name: "notification",
           description: "Envoyer une notification à l'utilisateur kick.",
-          type: "BOOLEAN",
+          type: ApplicationCommandOptionType.Boolean,
           required: true,
         },
         {
           name: "reason",
           description: "La raison du kick.",
-          type: "STRING",
+          type: ApplicationCommandOptionType.String,
           required: false,
         },
       ],
@@ -36,10 +36,9 @@ export class KickCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
-    const user = interaction.options.getMember("user")
-    const guildMember = user as GuildMember;
-    const reason = interaction.options.getString("reason")!;
-    const notification = interaction.options.getBoolean("notification");
+    const guildMember = (interaction.options as CommandInteractionOptionResolver).getMember("user") as GuildMember;
+    const reason = (interaction.options as CommandInteractionOptionResolver).getString("reason");
+    const notification = (interaction.options as CommandInteractionOptionResolver).getBoolean("notification");
 
     if (!guildMember.kickable) {
       interaction.reply('Vous ne pouvez pas kick cette personne.')
@@ -51,7 +50,7 @@ export class KickCommand extends Command {
       try {
         await guildMember.send({
           embeds: [
-            new MessageEmbed()
+            new EmbedBuilder()
             .setTitle(`Vous avez été kick du serveur ${interaction.guild!.name}.`)
             .setDescription(`Raison: ${reason} ! `)
             .setColor("#8e48f7")

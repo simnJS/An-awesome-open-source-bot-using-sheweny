@@ -1,8 +1,9 @@
 import { ShewenyClient, Command } from "sheweny";
 import {
   CommandInteraction,
-  MessageActionRow,
-  MessageButton,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
 } from "discord.js";
 
 export class UnlockCommand extends Command {
@@ -13,8 +14,8 @@ export class UnlockCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Moderation",
       cooldown: 0,
-      userPermissions: ["MANAGE_CHANNELS"],
-      clientPermissions: ["MANAGE_CHANNELS"],
+      userPermissions: ["ManageChannels"],
+      clientPermissions: ["ManageChannels"],
     });
   }
 
@@ -32,12 +33,12 @@ export class UnlockCommand extends Command {
         return;
     }
 
-    const raw = new MessageActionRow()
+    const raw = new ActionRowBuilder<ButtonBuilder>()
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId(`verif`)
           .setLabel(`Vérifier`)
-          .setStyle('PRIMARY')
+          .setStyle(ButtonStyle.Primary)
       )
 
                 

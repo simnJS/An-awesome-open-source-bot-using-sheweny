@@ -1,5 +1,5 @@
 import { ShewenyClient, Command } from "sheweny";
-import { CommandInteraction, MessageEmbed } from "discord.js";
+import { CommandInteraction, EmbedBuilder, ApplicationCommandOptionType, CommandInteractionOptionResolver } from "discord.js";
 import dotenv from "dotenv";
 import fetch from "node-fetch";
 dotenv.config();
@@ -11,12 +11,12 @@ export class DogCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Fun",
       cooldown: 60,
-      clientPermissions: ["SEND_MESSAGES"],
+      clientPermissions: ["SendMessages"],
       options: [
         {
           name: "ville",
           description: "La ville ou vous voulez avoir la météo",
-          type: "STRING",
+          type: ApplicationCommandOptionType.String, 
           required: true,
         },
       ],
@@ -24,7 +24,7 @@ export class DogCommand extends Command {
   }
 
   async execute(interaction: CommandInteraction) {
-    const ville = await interaction.options.getString("ville");
+    const ville = await (interaction.options as CommandInteractionOptionResolver).getString("ville");
     const request = await fetch(`http://api.weatherstack.com/current?access_key=${process.env.WEATHER_API_KEY}&query=${ville}`)
         const res = await request.json()
 
@@ -33,7 +33,7 @@ export class DogCommand extends Command {
         return
     }
     
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setTitle(`Météo de ${ville} (${res.location.country})`) 
             .setColor("#0099ff")
             .addFields(

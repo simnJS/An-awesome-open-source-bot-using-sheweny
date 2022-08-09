@@ -2,8 +2,8 @@ import { ShewenyClient, Command } from "sheweny";
 import {
   CommandInteraction,
   Message,
-  MessageActionRow,
-  MessageSelectMenu
+  ActionRowBuilder,
+  SelectMenuBuilder
 
 } from "discord.js";
 import dotenv from "dotenv";
@@ -36,9 +36,8 @@ export class AutoRoleCommand extends Command {
         const c = this.client.emojis.cache.find(emoji => emoji.name === "c_");
 		// END EMOJI
 
-        const row = new MessageActionRow()
-        .addComponents(
-            new MessageSelectMenu()
+        const row = new ActionRowBuilder<SelectMenuBuilder>()
+        new SelectMenuBuilder()
                 .setCustomId('selectRole')
                 .setPlaceholder('Choisissez vos rôles')
                 .setMinValues(1)
@@ -54,64 +53,63 @@ export class AutoRoleCommand extends Command {
                         label: 'Css',
                         description: 'Soit reconnu en tant que développeur Css.',
                         value: 'first_option',
-                        emoji: css
+                        emoji: `${css}`
                     },
                     {
                         label: 'Html',
                         description: 'Soit reconnu en tant que développeur Html.',
                         value: 'second_option',
-                        emoji: html
+                        emoji: `${html}`
                     },
                     {
                         label: 'Javascript/Typescript',	
                         description: 'Soit reconnu en tant que développeur Javascript/typescript.',
                         value: 'third_option',
-                        emoji: javascript
+                        emoji: `${javascript}`
                     },
                     {
                         label: 'Python',
                         description: 'Soit reconnu en tant que développeur Python.',
                         value: "fourth_option",
-                        emoji: _python
+                        emoji: `${_python}`
                     },
                     {
                         label: 'Shell',
                         description: 'Soit reconnu en tant que développeur dans le Shell.',
                         value: "fifth_option",
-                        emoji: batch
+                        emoji: `${batch}`
                     },
                     {
                         label: 'Java',
                         description: 'Soit reconnu en tant que développeur Java.',
                         value: "sixth_option",
-                        emoji: java
+                        emoji: `${java}`
                     },
                     {
                         label: 'Php',
                         description: 'Soit reconnu en tant que développeur Php.',
                         value: "seventh_option",
-                        emoji: php
+                        emoji: `${php}`
                     },
                     {
                         label: 'Lua',
                         description: 'Soit reconnu en tant que développeur Lua.',
                         value: "eighth_option",
-                        emoji: lua
+                        emoji: `${lua}`
                     },
                     {
                         label: 'C#',
                         description: 'Soit reconnu en tant que développeur C#.',
                         value: "ninth_option",
-                        emoji: csharp
+                        emoji: `${csharp}`
                     },
                     {
                         label: 'C / C++',
                         description: 'Soit reconnu en tant que développeur C / C++.',
                         value: "tenth_option",
-                        emoji: c
+                        emoji: `${c}`
                     },
                 ]),
-        );
 
     await message.channel?.send({ content: 'Choisissez vos rôles ci dessous !', components: [row] });
 

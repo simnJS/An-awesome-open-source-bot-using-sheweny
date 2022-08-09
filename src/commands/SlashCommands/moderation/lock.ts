@@ -1,7 +1,7 @@
 import { ShewenyClient, Command } from "sheweny";
 import {
   CommandInteraction,
-  MessageEmbed,
+  EmbedBuilder,
   TextChannel
 } from "discord.js";
 export class LockCommand extends Command {
@@ -12,22 +12,18 @@ export class LockCommand extends Command {
       type: "SLASH_COMMAND",
       category: "Moderation",
       cooldown: 0,
-      userPermissions: ["MANAGE_CHANNELS"],
-      clientPermissions: ["MANAGE_CHANNELS"],
+      userPermissions: ["ManageChannels"],
+      clientPermissions: ["ManageChannels"],
     });
   }
 
   async execute(interaction: CommandInteraction) {
-    const channel = interaction.channel;
+    const channel = interaction.channel as TextChannel;
 
-    if (channel?.type !== "GUILD_TEXT") {
-      interaction.reply("Vous pouvez lock seulement les channels textuels.");
-      return;
-    }
 
     channel.permissionOverwrites.edit(interaction.guild!.id, {
-      SEND_MESSAGES: false,
-      ADD_REACTIONS: false,
+      SendMessages: false,
+      AddReactions: false,
     });
 
     interaction.reply({
@@ -36,7 +32,7 @@ export class LockCommand extends Command {
     });
 
     channel.send({ embeds: [
-      new MessageEmbed()
+      new EmbedBuilder()
         .setTitle("Ce salon est vérouillé.")
         .setDescription(`Vous ne pouvez plus y envoyer de message.`)
         .setColor("#8e48f7")
