@@ -24,14 +24,14 @@ export class MessageDeleteEvent extends Event {
     const logChannel = await (message.guild!.channels.cache.find(c => c.id === settings.ghostChannel) as TextChannel)
     if (!logChannel) return;
 
-
+    console.log(content)
     if (!author || mentions.users.size === 0 || message.content.length > 500)  {
         return
     }
     const ghostEmbed = new EmbedBuilder()
         .setColor('#FEE75C')
         .setTitle(`Possible ghost ping détecté`)
-        .setDescription(`Message: ${message.content} \nAuteur: ${author}\nChannel: ${channel}`)
+        .setDescription(`Message: ${message.cleanContent} \nAuteur: ${author}\nChannel: ${channel}`)
   
     await logChannel.send({ embeds: [ghostEmbed] });
     }
