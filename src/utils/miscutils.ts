@@ -1,3 +1,4 @@
+import { Guild, GuildMember, TextChannel } from "discord.js";
 export function timeformat(timeInSeconds: number) :string  {
   const days = Math.floor((timeInSeconds % 31536000) / 86400);
   const hours = Math.floor((timeInSeconds % 86400) / 3600);
@@ -10,3 +11,4 @@ export function timeformat(timeInSeconds: number) :string  {
     (seconds > 0 ? `${seconds} secondes` : "")
   );
 }
+ 

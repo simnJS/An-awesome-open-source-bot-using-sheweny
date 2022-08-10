@@ -101,6 +101,24 @@ export class ConfigCommand extends Command {
                             required: true,
                         },
                     ],
+                },  {
+                    name: "anti-ghostping",
+                    description: "La configuration en rapport avec l'anti-ghostping.",
+                    type: ApplicationCommandOptionType.Subcommand,
+                    options: [
+                        {
+                            name: "status",
+                            description: "Vous permet d'activer ou de désactiver l'anti ghostping.",
+                            type: ApplicationCommandOptionType.Boolean,
+                            required: true,
+                        },
+                        {
+                            name: "channel",
+                            description: "Le channel ou les logs de l'anti ghostping seront envoyés.",
+                            type: ApplicationCommandOptionType.Channel,
+                            required: true,
+                        },
+                    ],
                 }
             ]
         });
@@ -204,6 +222,26 @@ export class ConfigCommand extends Command {
                 reponse4.push("Le role de l'autorole a bien été changer.")
             }
             interaction.reply(reponse4.join("\n"))
+
+        break
+        case "anti-ghostping":
+            const status5 = (interaction.options as CommandInteractionOptionResolver).getBoolean("status");
+            const channel3 = (interaction.options as CommandInteractionOptionResolver).getChannel("channel") as TextChannel;
+            let reponse5: string[] = [];
+            if (status5 == true) {
+                this.client.db.update(interaction.guild!.id, { ghost: 'true' })
+                reponse5.push("L'anti-ghostping est maintenant activé.")
+            }
+            if (status5 == false) {
+                this.client.db.update(interaction.guild!.id, { ghost: 'false' })
+                reponse5.push("L'anti-ghostping est maintenant désactivé.")
+            }
+            if (channel3) {
+                this.client.db.update(interaction.guild!.id, { ghostChannel: channel3.id })
+
+                reponse5.push("Le salon de l'anti-ghostping a bien été changer.")
+            }
+            interaction.reply(reponse5.join("\n"))
 
         break
         }
