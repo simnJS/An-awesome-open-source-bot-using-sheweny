@@ -25,8 +25,7 @@ export class MessageDeleteEvent extends Event {
     if (!logChannel) return;
 
 
-    if (!author || mentions.users.size === 0 ) {
-        console.log('ff')
+    if (!author || mentions.users.size === 0 || message.content.length > 500)  {
         return
     }
     const ghostEmbed = new EmbedBuilder()
