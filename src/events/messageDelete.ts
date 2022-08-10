@@ -10,28 +10,28 @@ export class MessageDeleteEvent extends Event {
   }
 
   async execute(message: Message) {
-    const { content, channel, author, guild, mentions } = message;
+    const { content, channel, author, guild, mentions, cleanContent } = message;
 
-    if (message.author.bot ) return
+    if (author.bot ) return
     
-    const settings = await this.client.db.get(message.guild!.id);
+    const settings = await this.client.db.get(guild!.id);
 
     if (!settings) return;
     if (settings.ghost === false) return;
 
 
 
-    const logChannel = await (message.guild!.channels.cache.find(c => c.id === settings.ghostChannel) as TextChannel)
+    const logChannel = await (guild!.channels.cache.find(c => c.id === settings.ghostChannel) as TextChannel)
     if (!logChannel) return;
 
     console.log(content)
-    if (!author || mentions.users.size === 0 || message.content.length > 500)  {
+    if (!author || mentions.users.size === 0 || content.length > 500)  {
         return
     }
     const ghostEmbed = new EmbedBuilder()
         .setColor('#FEE75C')
         .setTitle(`Possible ghost ping détecté`)
-        .setDescription(`Message: ${message.cleanContent} \nAuteur: ${author}\nChannel: ${channel}`)
+        .setDescription(`Message: ${cleanContent} \nAuteur: ${author}\nChannel: ${channel}`)
   
     await logChannel.send({ embeds: [ghostEmbed] });
     }
