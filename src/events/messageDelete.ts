@@ -32,7 +32,7 @@ export class MessageDeleteEvent extends Event {
     const ghostEmbed = new EmbedBuilder()
         .setColor('#FEE75C')
         .setTitle(`Possible ghost ping détecté`)
-        .setDescription(`Message: ${content}\nAuteur: ${author}\nChannel: ${channel}`)
+        .setDescription(`Message: ${message.content} \nAuteur: ${author}\nChannel: ${channel}`)
   
     await logChannel.send({ embeds: [ghostEmbed] });
     }
