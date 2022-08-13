@@ -39,14 +39,5 @@ mongoose.connection.on("error", () => {
   console.log("Connection failed. Try reconecting in 5 seconds...");
   setTimeout(() => connectDB(), 5000);
 });
-client.managers.commands!.on(
-  "cooldownLimit",
-  (interaction: CommandInteraction | Message) => {
-    interaction.reply({
-      content: "Please slow down",
-      ephemeral: true,
-    });
-  }
-);
 
 connectDB();
