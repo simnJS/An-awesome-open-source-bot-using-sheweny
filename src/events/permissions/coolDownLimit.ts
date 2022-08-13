@@ -12,7 +12,7 @@ export class interactionCommandCreate extends Event {
 
   async execute(interaction: CommandInteraction, time: number) {
     interaction.reply({
-      content: `Vous devez attendre ${(time/10000)} secondes !`,
+      content: `Vous devez attendre ${(time/1000).toFixed(0)} secondes !`,
       ephemeral: true,
     });
   }
