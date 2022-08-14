@@ -72,7 +72,7 @@ export class MailCommand extends Command {
     }
 
 
-    if ((interaction.options.get("anonyme")?.value as boolean) == false) {
+    if ((interaction.options as CommandInteractionOptionResolver).getBoolean("anonyme") == true) {
       try {
         console.log('Commande mail')
         user!.send({
