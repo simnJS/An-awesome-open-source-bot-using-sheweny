@@ -27,11 +27,13 @@ export default class Safia extends ShewenyClient {
         commands: {
           directory: "./commands",
           autoRegisterApplicationCommands: true,
+          applicationPermissions: true,
           prefix: "!",
           default: {
             category: "Other",
             channel: "GUILD",
             cooldown: 3,
+            userPermissions: ['UseApplicationCommands']
           },
         },
         events: {
