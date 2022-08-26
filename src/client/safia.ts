@@ -27,7 +27,7 @@ export default class Safia extends ShewenyClient {
         commands: {
           directory: "./commands",
           autoRegisterApplicationCommands: true,
-          applicationPermissions: false,
+          applicationPermissions: true,
           prefix: "!",
           default: {
             category: "Other",
