@@ -33,7 +33,7 @@ export default class Safia extends ShewenyClient {
             category: "Other",
             channel: "GUILD",
             cooldown: 3,
-            userPermissions: ['ViewChannel']
+            userPermissions: ['SendMessages']
           },
         },
         events: {
