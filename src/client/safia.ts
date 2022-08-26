@@ -15,6 +15,7 @@ export default class Safia extends ShewenyClient {
       },
       intents: ["Guilds", "GuildMembers", "GuildMessages", "MessageContent"],
       partials: [Partials.GuildMember],
+      joinThreadsOnCreate: true,
       presence: {
         status: "online",
         activities: [
