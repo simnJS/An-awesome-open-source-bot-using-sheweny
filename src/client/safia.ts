@@ -31,10 +31,10 @@ export default class Safia extends ShewenyClient {
           applicationPermissions: true,
           prefix: "!",
           default: {
+            userPermissions: ["ViewChannel"],
             category: "Other",
             channel: "GUILD",
             cooldown: 3,
-
           },
         },
         events: {
