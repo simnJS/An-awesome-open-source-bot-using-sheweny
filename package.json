@@ -22,7 +22,7 @@
     "moment": "^2.29.3",
     "mongoose": "^6.4.0",
     "nodemon": "^2.0.16",
-    "sheweny": "^4.0.2",
+    "sheweny": "^4.0.3",
     "ts-node": "^10.8.0",
     "tslint": "^5.12.1",
     "typescript": "4.6.3"
