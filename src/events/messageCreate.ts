@@ -1,6 +1,6 @@
 import { Event } from "sheweny";
 import type { ShewenyClient } from "sheweny";
-import { Message, TextChannel, EmbedBuilder } from "discord.js";
+import { Message, TextChannel, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export class MessageCreateEvent extends Event {
   constructor(client: ShewenyClient) {
@@ -26,8 +26,20 @@ export class MessageCreateEvent extends Event {
         .setDescription(message.content)
         .setTimestamp()
 
-
-      await message.reply({ embeds: [suggestEmbed] }).then(function (message) {
+        const raw = new ActionRowBuilder<ButtonBuilder>()
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId(`accepter`)
+            .setLabel(`Accepter`)
+            .setStyle(ButtonStyle.Success)
+        )
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId(`refuser`)
+            .setLabel(`Refuser`)
+            .setStyle(ButtonStyle.Danger)
+        )
+      await message.reply({ embeds: [suggestEmbed], components: [raw] }).then(function (message) {
         message.react("👍")
         message.react("👎")
         message.startThread({
