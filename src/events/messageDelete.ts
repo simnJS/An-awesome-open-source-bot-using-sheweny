@@ -10,29 +10,29 @@ export class MessageDeleteEvent extends Event {
   }
 
   async execute(message: Message) {
-    const { content, channel, author, guild, mentions, cleanContent } = message;
+    // const { content, channel, author, guild, mentions, cleanContent } = message;
 
-    if (author.bot ) return
+    // if (author.bot ) return
     
-    const settings = await this.client.db.get(guild!.id);
+    // const settings = await this.client.db.get(guild!.id);
 
-    if (!settings) return;
-    if (settings.ghost === false) return;
+    // if (!settings) return;
+    // if (settings.ghost === false) return;
 
 
 
-    const logChannel = await (guild!.channels.cache.find(c => c.id === settings.ghostChannel) as TextChannel)
-    if (!logChannel) return;
+    // const logChannel = await (guild!.channels.cache.find(c => c.id === settings.ghostChannel) as TextChannel)
+    // if (!logChannel) return;
 
-    console.log(content)
-    if (!author || mentions.users.size === 0 || content.length > 500)  {
-        return
-    }
-    const ghostEmbed = new EmbedBuilder()
-        .setColor('#FEE75C')
-        .setTitle(`Possible ghost ping détecté`)
-        .setDescription(`Message: ${cleanContent} \nAuteur: ${author}\nChannel: ${channel}`)
+    // console.log(content)
+    // if (!author || mentions.users.size === 0 || content.length > 500)  {
+    //     return
+    // }
+    // const ghostEmbed = new EmbedBuilder()
+    //     .setColor('#FEE75C')
+    //     .setTitle(`Possible ghost ping détecté`)
+    //     .setDescription(`Message: ${cleanContent} \nAuteur: ${author}\nChannel: ${channel}`)
   
-    await logChannel.send({ embeds: [ghostEmbed] });
+    // await logChannel.send({ embeds: [ghostEmbed] });
     }
 }
