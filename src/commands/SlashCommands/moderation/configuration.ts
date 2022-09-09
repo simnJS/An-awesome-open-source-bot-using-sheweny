@@ -118,26 +118,8 @@ export class ConfigCommand extends Command {
                             type: ApplicationCommandOptionType.Channel,
                             required: true,
                         },
-                    ], 
-            },  {
-                name: "patchnotes",
-                description: "La configuration en rapport avec les nouveautés du bot.",
-                type: ApplicationCommandOptionType.Subcommand,
-                options: [
-                    {
-                        name: "status",
-                        description: "Vous permet d'activer ou de désactiver les patchnotes.",
-                        type: ApplicationCommandOptionType.Boolean,
-                        required: true,
-                    },
-                    {
-                        name: "channel",
-                        description: "Le channel ou les patchnotes seront envoyés.",
-                        type: ApplicationCommandOptionType.Channel,
-                        required: true,
-                    },
-                ],
-            }
+                    ],
+                }
             ]
         });
     }
@@ -260,26 +242,6 @@ export class ConfigCommand extends Command {
                 reponse5.push("Le salon de l'anti-ghostping a bien été changer.")
             }
             interaction.reply(reponse5.join("\n"))
-
-        break
-        case "patchnote":
-            const status6 = (interaction.options as CommandInteractionOptionResolver).getBoolean("status");
-            const channel4 = (interaction.options as CommandInteractionOptionResolver).getChannel("channel") as TextChannel;
-            let reponse6: string[] = [];
-            if (status6 == true) {
-                this.client.db.update(interaction.guild!.id, { pacthnotes: 'true' })
-                reponse6.push("Les message de patchnotes sont maintenant activé.")
-            }
-            if (status6 == false) {
-                this.client.db.update(interaction.guild!.id, { pacthnotes: 'false' })
-                reponse6.push("Les message de patchnotes sont maintenant désactivé.")
-            }
-            if (channel4) {
-                this.client.db.update(interaction.guild!.id, { pacthnotesChannel: channel4.id })
-
-                reponse6.push("Le salon des message de patchnotes a bien été changer.")
-            }
-            interaction.reply(reponse6.join("\n"))
 
         break
         }
