@@ -13,7 +13,7 @@ export default class Safia extends ShewenyClient {
       allowedMentions: {
         parse: ["roles", "users"],
       },
-      intents: ["Guilds", "GuildMembers", "GuildMessages", "MessageContent"],
+      intents: ["Guilds", "GuildMembers", "GuildMessages", "MessageContent", "GuildPresences" ],
       partials: [Partials.GuildMember],
       joinThreadsOnCreate: true,
       presence: {
