@@ -6,11 +6,19 @@ export class MessageCreateEvent extends Event {
   constructor(client: ShewenyClient) {
     super(client, "messageCreate", {
       description: "message created",
+      
     });
   }
 
   async execute(message: Message) {
-    if(message.system) return;
+
+    if (message.author.bot) return;
+    if (message.author.bot || !message.guild) return;
+
+
+
+
+
     const settings = await this.client.db.get(message.guild!.id).catch(() => null);
     const channel = await (message.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
 
