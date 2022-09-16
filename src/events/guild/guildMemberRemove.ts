@@ -17,7 +17,7 @@ export class GuildMemberAddEvent extends Event {
 
   async execute(member: GuildMember) {
     const settings = await this.client.db.get(member.guild!.id);
-
+    if (member.user.bot) return;
     try {
       if (settings.welcome === false) return
         const channel = await (member.guild!.channels.cache.find(
