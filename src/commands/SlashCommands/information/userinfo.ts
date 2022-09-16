@@ -28,25 +28,25 @@ export class User extends Command {
     });
   }
   async execute(interaction: CommandInteraction) {
-    // Start Emoji
     const crayon = this.client.emojis.cache.get("1019644082710130759");
     const id = this.client.emojis.cache.get("1019652479757066301");
     const carteid = this.client.emojis.cache.get("1019926978595401808");
     const ordi = this.client.emojis.cache.get("1019928553120346144");
     const calendrier = this.client.emojis.cache.get("1020021313491976293");
     const fleche = this.client.emojis.cache.get("1020021910588899348");
-      if (!interaction.options.getUser("user")) {
+
+    if (!interaction.options.getUser("user")) {
       const user = await interaction.member as GuildMember;
-      
-    const data = user.presence?.clientStatus!;
-    const test = `${data.desktop ? "🖥️ Ordinateur |" : ""} ${data.mobile ? "📱 Mobile |" : ""} ${data.web ? "🌐 Navigateur |" : ""}`
+
+      const data = user.presence?.clientStatus!;
+      const test = `${data.desktop ? "🖥️ Ordinateur |" : ""} ${data.mobile ? "📱 Mobile |" : ""} ${data.web ? "🌐 Navigateur |" : ""}`
 
 
-    let status = ""
-        if (user.presence?.status === "dnd") status = "🔴"
-           if (user.presence?.status === "idle") status = "🟠"
-            if (user.presence?.status === "online") status = "🟢"
-             if (user.presence?.status === "offline") status = "⚫"
+      let status = ""
+      if (user.presence?.status === "dnd") status = "🔴"
+      if (user.presence?.status === "idle") status = "🟠"
+      if (user.presence?.status === "online") status = "🟢"
+      if (user.presence?.status === "offline") status = "⚫"
 
 
       const embed = new EmbedBuilder()
@@ -75,28 +75,22 @@ export class User extends Command {
             >>> ${ordi} **Plateforme**  » \`${test}${status}\``,
             inline: false,
           }
-
-
-          
         )
         .setColor("#36393f");
-
-      console.log(user.presence?.clientStatus)
       await interaction.reply({ embeds: [embed] });
     }
-
     if (interaction.options.getUser("user")) {
       const user = await interaction.options.getMember("user") as GuildMember;
-      
-    const data = user.presence?.clientStatus!;
-    const test = `${data.desktop ? "🖥️ Ordinateur |" : ""} ${data.mobile ? "📱 Mobile |" : ""} ${data.web ? "🌐 Navigateur |" : ""}`
+
+      const data = user.presence?.clientStatus!;
+      const test = `${data.desktop ? "🖥️ Ordinateur |" : ""} ${data.mobile ? "📱 Mobile |" : ""} ${data.web ? "🌐 Navigateur |" : ""}`
 
 
-    let status = ""
-        if (user.presence?.status === "dnd") status = "🔴"
-           if (user.presence?.status === "idle") status = "🟠"
-            if (user.presence?.status === "online") status = "🟢"
-             if (user.presence?.status === "offline") status = "⚫"
+      let status = ""
+      if (user.presence?.status === "dnd") status = "🔴"
+      if (user.presence?.status === "idle") status = "🟠"
+      if (user.presence?.status === "online") status = "🟢"
+      if (user.presence?.status === "offline") status = "⚫"
 
 
       const embed = new EmbedBuilder()
@@ -127,7 +121,7 @@ export class User extends Command {
           }
 
 
-          
+
         )
         .setColor("#36393f");
 

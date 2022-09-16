@@ -10,6 +10,7 @@ export class MessageCreateEvent extends Event {
   }
 
   async execute(message: Message) {
+    if(message.system) return;
     const settings = await this.client.db.get(message.guild!.id).catch(() => null);
     const channel = await (message.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
 
