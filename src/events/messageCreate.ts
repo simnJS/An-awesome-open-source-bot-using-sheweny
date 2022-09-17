@@ -12,23 +12,18 @@ export class MessageCreateEvent extends Event {
 
   async execute(message: Message) {
 
-    if (message.author.bot) return;
     if (message.author.bot || !message.guild) return;
-
-
-
-
 
     const settings = await this.client.db.get(message.guild!.id).catch(() => null);
     const channel = await (message.guild!.channels.cache.find(c => c.id === settings.suggestChannel) as TextChannel)
-
+    console.log('1')
     if (!channel) return;
     if (settings.suggestion === false) return;
     if (message.author.bot) return;
-
+    console.log('1')
     if (message.channel === channel) {
       const threadAuthor = message.member!.displayName;
-
+      console.log('1')
       const suggestEmbed = new EmbedBuilder()
         .setColor('#FEE75C')
         .setTitle(`Nouvelle suggestion de ${message.author.username}`)
@@ -48,6 +43,7 @@ export class MessageCreateEvent extends Event {
             .setLabel(`Refuser`)
             .setStyle(ButtonStyle.Danger)
         )
+        console.log('1')
       await message.reply({ embeds: [suggestEmbed], components: [raw] }).then(function (message) {
         message.react("👍")
         message.react("👎")
