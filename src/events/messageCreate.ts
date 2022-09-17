@@ -53,7 +53,7 @@ export class MessageCreateEvent extends Event {
         });
       });
 
-      message.delete();
+      await message.delete();
     };
   }
 }
