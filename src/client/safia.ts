@@ -46,6 +46,9 @@ export default class Safia extends ShewenyClient {
         buttons: {
           directory: "./interactions/buttons",
         },
+        modals: {
+          directory: "./interactions/modals",
+        },
       },
     });
     this.db = new DatabaseProvider();
